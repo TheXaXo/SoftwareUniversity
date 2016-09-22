@@ -6,6 +6,6 @@ class CircleArea
     {
         double r = double.Parse(Console.ReadLine());
         double circleArea = Math.PI * Math.Pow(r, 2);
-        Console.WriteLine("{0:f12}", circleArea);
+        Console.WriteLine("{0:f12}", circleArea);       
     }
 }
