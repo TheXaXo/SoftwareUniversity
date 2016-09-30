@@ -13,7 +13,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "04.NumbersInReversedOrder",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05.FibonacciNumbers", "05.FibonacciNumbers\05.FibonacciNumbers.csproj", "{A0CBA11C-24D4-4125-890A-D0970CF5426E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06.PrimeChecker", "06.CheckPrime\06.PrimeChecker.csproj", "{4DEB2EA1-7906-4D43-A858-D59859B5E940}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06.PrimeChecker", "06.PrimeChecker\06.PrimeChecker.csproj", "{4DEB2EA1-7906-4D43-A858-D59859B5E940}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07.PrimesInGivenRange", "07.PrimesInGivenRange\07.PrimesInGivenRange.csproj", "{D0D9901E-B5A3-4C33-AED1-F0A4962B9A38}"
 EndProject
@@ -30,6 +30,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "13.Factorial", "13.Factorial\13.Factorial.csproj", "{697F05DF-DC04-4F62-B265-B223602D4014}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "14.FactorialTrailingZeroes", "14.FactorialTrailingZeroes\14.FactorialTrailingZeroes.csproj", "{C549E459-C9E5-45EC-9F7F-CCBC973AFC98}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "15.InstructionSet", "15.InstructionSet\15.InstructionSet.csproj", "{84A6A8B2-854C-4517-8F94-4783499A26CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +95,10 @@ Global
 		{C549E459-C9E5-45EC-9F7F-CCBC973AFC98}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C549E459-C9E5-45EC-9F7F-CCBC973AFC98}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C549E459-C9E5-45EC-9F7F-CCBC973AFC98}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84A6A8B2-854C-4517-8F94-4783499A26CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84A6A8B2-854C-4517-8F94-4783499A26CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84A6A8B2-854C-4517-8F94-4783499A26CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84A6A8B2-854C-4517-8F94-4783499A26CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
