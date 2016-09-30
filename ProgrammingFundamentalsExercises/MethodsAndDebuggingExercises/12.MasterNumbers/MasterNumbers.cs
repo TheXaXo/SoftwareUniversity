@@ -5,10 +5,10 @@ class MasterNumbers
     static void Main(string[] args)
     {
         int number = int.Parse(Console.ReadLine());
-        PrintsMasterNumber(number);
+        PrintsMasterNumbers(number);
     }
 
-    static void PrintsMasterNumber(int number)
+    static void PrintsMasterNumbers(int number)
     {
         for (int i = 1; i <= number; i++)
         {
@@ -21,39 +21,17 @@ class MasterNumbers
 
     static bool IsPalindrome(int number)
     {
-        if (number < 10)
+        int numberTemp = number;
+        int numberReversed = 0;
+        int lastDigit = 0;
+        while (number > 0)
         {
-            return true;
+            lastDigit = number % 10;
+            numberReversed = numberReversed * 10 + lastDigit;
+            number /= 10;
         }
 
-        string firstPart = null;
-        string secondPartReversed = null;
-        int numberLength = number.ToString().Length;
-
-        if (numberLength % 2 == 0)
-        {
-            for (int i = 0; i <= numberLength / 2 - 1; i++)
-            {
-                firstPart += int.Parse(number.ToString()[i].ToString());
-            }
-            for (int i = numberLength - 1; i >= numberLength / 2; i--)
-            {
-                secondPartReversed += int.Parse(number.ToString()[i].ToString());
-            }
-        }
-        else
-        {
-            for (int i = 0; i <= numberLength / 2 - 1; i++)
-            {
-                firstPart += int.Parse(number.ToString()[i].ToString());
-            }
-            for (int i = numberLength - 1; i >= numberLength / 2 + 1; i--)
-            {
-                secondPartReversed += int.Parse(number.ToString()[i].ToString());
-            }
-        }
-
-        if (firstPart == secondPartReversed)
+        if (numberTemp == numberReversed)
         {
             return true;
         }
@@ -77,12 +55,15 @@ class MasterNumbers
 
     static bool HasAtleastOneEvenDigit(int number)
     {
-        for (int i = 0; i < number.ToString().Length; i++)
+        int lastDigit = 0;
+        while (number > 0)
         {
-            if (int.Parse(number.ToString()[i].ToString()) % 2 == 0)
+            lastDigit = number % 10;
+            if (lastDigit % 2 == 0)
             {
                 return true;
             }
+            number /= 10;
         }
         return false;
     }
