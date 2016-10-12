@@ -37,7 +37,7 @@ class LogsAggregator
             }
         }
 
-        foreach(KeyValuePair<string, List<string>> pair in userIp)
+        foreach (KeyValuePair<string, List<string>> pair in userIp)
         {
             List<string> userIpSorted = new List<string>();
             userIpSorted = pair.Value.Distinct().OrderBy(a => a).ToList();
