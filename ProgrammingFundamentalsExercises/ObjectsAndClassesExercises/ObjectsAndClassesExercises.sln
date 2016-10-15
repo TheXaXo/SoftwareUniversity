@@ -17,6 +17,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "06.BookLibraryModification"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "07.AndreiAndBilliard", "07.AndreiAndBilliard\07.AndreiAndBilliard.csproj", "{1EC09972-B952-435F-980A-76D337F9C323}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "08.MentorGroup", "08.MentorGroup\08.MentorGroup.csproj", "{F45432AC-11F9-421B-A874-31CD7419B071}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "09.TeamworkProjects", "09.TeamworkProjects\09.TeamworkProjects.csproj", "{4D9E4D5A-4D1B-462E-B067-9F2DA9E94729}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +55,14 @@ Global
 		{1EC09972-B952-435F-980A-76D337F9C323}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1EC09972-B952-435F-980A-76D337F9C323}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1EC09972-B952-435F-980A-76D337F9C323}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F45432AC-11F9-421B-A874-31CD7419B071}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F45432AC-11F9-421B-A874-31CD7419B071}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F45432AC-11F9-421B-A874-31CD7419B071}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F45432AC-11F9-421B-A874-31CD7419B071}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D9E4D5A-4D1B-462E-B067-9F2DA9E94729}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D9E4D5A-4D1B-462E-B067-9F2DA9E94729}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D9E4D5A-4D1B-462E-B067-9F2DA9E94729}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D9E4D5A-4D1B-462E-B067-9F2DA9E94729}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
