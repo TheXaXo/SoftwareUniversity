@@ -3,35 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Globalization;
 
-class BookLibrary
+class BookLibraryModification
 {
     static void Main(string[] args)
     {
         int n = int.Parse(Console.ReadLine());
-        Dictionary<string, decimal> authorAndPrice = new Dictionary<string, decimal>();
+        List<Book> books = new List<Book>();
 
         for (int i = 1; i <= n; i++)
         {
             Book book = GetBook();
-
-            if (authorAndPrice.ContainsKey(book.Author))
-            {
-                authorAndPrice[book.Author] += book.Price;
-            }
-            else
-            {
-                authorAndPrice[book.Author] = book.Price;
-            }
+            books.Add(book);
         }
-           
-        authorAndPrice = authorAndPrice
-            .OrderByDescending(x => x.Value)
-            .ThenBy(x => x.Key)
-            .ToDictionary(x => x.Key, y => y.Value);
 
-        foreach (KeyValuePair<string, decimal> pair in authorAndPrice)
+        DateTime date = DateTime.ParseExact(Console.ReadLine(), "dd.MM.yyyy", CultureInfo.InvariantCulture);
+
+        books = books
+            .Where(x => x.Date >= date)
+            .OrderBy(x => x.Date)
+            .ThenBy(x => x.Title)
+            .ToList();
+
+        foreach (Book book in books)
         {
-            Console.WriteLine($"{pair.Key} -> {pair.Value:f2}");
+            Console.WriteLine($"{book.Title} -> {book.Date.ToString("dd.MM.yyyy")}");
         }
     }
 
