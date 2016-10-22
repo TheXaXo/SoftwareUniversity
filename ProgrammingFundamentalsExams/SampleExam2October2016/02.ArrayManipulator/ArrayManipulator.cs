@@ -246,7 +246,7 @@ class ArrayManipulator
             .OrderBy(x => x)
             .First();
 
-        int index = Array.IndexOf(array, minOdd);
+        int index = Array.LastIndexOf(array, minOdd);
         return index;
     }
 
@@ -276,6 +276,7 @@ class ArrayManipulator
             .Where(x => x % 2 == 0)
             .Reverse()
             .Take(count)
+            .Reverse()
             .ToArray();
 
         return result;
@@ -287,6 +288,7 @@ class ArrayManipulator
             .Where(x => x % 2 != 0)
             .Reverse()
             .Take(count)
+            .Reverse()
             .ToArray();
 
         return result;
