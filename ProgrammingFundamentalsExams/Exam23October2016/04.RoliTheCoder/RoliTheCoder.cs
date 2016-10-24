@@ -56,6 +56,7 @@ class RoliTheCoder
         foreach (KeyValuePair<string, List<string>> pair in eventParticipants)
         {
             Console.WriteLine($"{pair.Key} - {pair.Value.Count}");
+
             List<string> participants = pair.Value.OrderBy(x => x).ToList();
 
             foreach (string participant in participants)
