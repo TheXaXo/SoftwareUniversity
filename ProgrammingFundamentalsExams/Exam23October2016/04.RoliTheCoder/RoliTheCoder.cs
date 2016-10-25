@@ -26,7 +26,9 @@ class RoliTheCoder
             int id = int.Parse(match.Groups[1].ToString());
             string eventName = match.Groups[2].ToString();
             List<string> participants = match.Groups[3].ToString()
-                .Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+                .Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                .Distinct()
+                .ToList();
 
             if (!idEvent.ContainsKey(id))
             {
