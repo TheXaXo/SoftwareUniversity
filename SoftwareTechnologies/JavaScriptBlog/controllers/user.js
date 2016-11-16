@@ -1,4 +1,5 @@
 const User = require('mongoose').model('User');
+const Role = require('mongoose').model('Role');
 const encryption = require('./../utilities/encryption');
 
 module.exports = {
@@ -6,7 +7,7 @@ module.exports = {
         res.render('user/register');
     },
 
-    registerPost:(req, res) => {
+    registerPost: (req, res) => {
         let registerArgs = req.body;
 
         User.findOne({email: registerArgs.email}).then(user => {
@@ -31,15 +32,30 @@ module.exports = {
                     salt: salt
                 };
 
-                User.create(userObject).then(user => {
-                    req.logIn(user, (err) => {
-                        if (err) {
-                            registerArgs.error = err.message;
-                            res.render('user/register', registerArgs);
-                            return;
-                        }
+                let roles = [];
 
-                        res.redirect('/')
+                Role.findOne({name: 'User'}).then(role => {
+                    roles.push(role.id);
+                    userObject.roles = roles;
+
+                    User.create(userObject).then(user => {
+                        role.users.push(user);
+                        role.save(err => {
+                            if (err) {
+                                registerArgs.error = err.message;
+                                res.render('user/register', registerArgs);
+                            } else {
+                                req.logIn(user, (err) => {
+                                    if (err) {
+                                        registerArgs.error = err.message;
+                                        res.render('user/register', registerArgs);
+                                        return;
+                                    }
+
+                                    res.redirect('/')
+                                })
+                            }
+                        })
                     })
                 })
             }
@@ -53,7 +69,7 @@ module.exports = {
     loginPost: (req, res) => {
         let loginArgs = req.body;
         User.findOne({email: loginArgs.email}).then(user => {
-            if (!user ||!user.authenticate(loginArgs.password)) {
+            if (!user || !user.authenticate(loginArgs.password)) {
                 let errorMsg = 'Either username or password is invalid!';
                 loginArgs.error = errorMsg;
                 res.render('user/login', loginArgs);
@@ -67,7 +83,13 @@ module.exports = {
                     return;
                 }
 
-                res.redirect('/');
+                let returnUrl = '/';
+                if (req.session.returnUrl){
+                    returnUrl = req.session.returnUrl;
+                    delete req.session.returnUrl;
+                }
+
+                res.redirect(returnUrl);
             })
         })
     },
