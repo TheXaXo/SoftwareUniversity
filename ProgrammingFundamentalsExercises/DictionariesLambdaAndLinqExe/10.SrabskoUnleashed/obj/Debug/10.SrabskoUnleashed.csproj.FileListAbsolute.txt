@@ -1,0 +1,5 @@
+C:\Users\TheXaXo\Documents\SoftwareUniversity\ProgrammingFundamentalsExercises\DictionariesLambdaAndLinqExe\10.SrabskoUnleashed\bin\Debug\10.SrabskoUnleashed.exe.config
+C:\Users\TheXaXo\Documents\SoftwareUniversity\ProgrammingFundamentalsExercises\DictionariesLambdaAndLinqExe\10.SrabskoUnleashed\bin\Debug\10.SrabskoUnleashed.exe
+C:\Users\TheXaXo\Documents\SoftwareUniversity\ProgrammingFundamentalsExercises\DictionariesLambdaAndLinqExe\10.SrabskoUnleashed\bin\Debug\10.SrabskoUnleashed.pdb
+C:\Users\TheXaXo\Documents\SoftwareUniversity\ProgrammingFundamentalsExercises\DictionariesLambdaAndLinqExe\10.SrabskoUnleashed\obj\Debug\10.SrabskoUnleashed.exe
+C:\Users\TheXaXo\Documents\SoftwareUniversity\ProgrammingFundamentalsExercises\DictionariesLambdaAndLinqExe\10.SrabskoUnleashed\obj\Debug\10.SrabskoUnleashed.pdb

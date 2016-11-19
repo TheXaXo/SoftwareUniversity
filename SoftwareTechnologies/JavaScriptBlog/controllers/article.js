@@ -42,7 +42,7 @@ module.exports = {
         let id = req.params.id;
 
         Article.findById(id).populate('author').then(article => {
-            if (!req.user){
+            if (!req.user) {
                 res.render('article/details', {article: article, isUserAuthorized: false});
                 return;
             }
@@ -58,7 +58,7 @@ module.exports = {
     editGet: (req, res) => {
         let id = req.params.id;
 
-        if (!req.isAuthenticated()){
+        if (!req.isAuthenticated()) {
             let returnUrl = `/article/edit/${id}`;
             req.session.returnUrl = returnUrl;
 
@@ -67,7 +67,7 @@ module.exports = {
         }
         Article.findById(id).then(article => {
             req.user.isInRole('Admin').then(isAdmin => {
-                if (!isAdmin && !req.user.isAuthor(article)){
+                if (!isAdmin && !req.user.isAuthor(article)) {
                     res.redirect('/');
                 }
             });
@@ -79,7 +79,7 @@ module.exports = {
         let id = req.params.id;
         let articleArgs = req.body;
 
-        if (!req.isAuthenticated()){
+        if (!req.isAuthenticated()) {
             let returnUrl = `/article/edit/${id}`;
             req.session.returnUrl = returnUrl;
 
@@ -88,31 +88,36 @@ module.exports = {
         }
 
         req.user.isInRole('Admin').then(isAdmin => {
-            if (!isAdmin && !req.user.isAuthor(article)){
+            if (!isAdmin && !req.user.isAuthor(article)) {
                 res.redirect('/');
             }
         });
 
         let errorMsg = '';
-        if (!articleArgs.title){
+        if (!articleArgs.title) {
             errorMsg = 'Article title cannot be empty!';
-        } else if (!articleArgs.content){
+        } else if (!articleArgs.content) {
             errorMsg = 'Article content cannot be empty';
         }
 
-        if (errorMsg){
+        if (errorMsg) {
             res.render('article/edit', {error: errorMsg})
-        } else{
-           Article.update({_id: id}, {$set: {title: articleArgs.title, content: articleArgs.content}}).then(updateStatus => {
-               res.redirect(`/article/details/${id}`);
-           })
+        } else {
+            Article.update({_id: id}, {
+                $set: {
+                    title: articleArgs.title,
+                    content: articleArgs.content
+                }
+            }).then(updateStatus => {
+                res.redirect(`/article/details/${id}`);
+            })
         }
     },
 
     deleteGet: (req, res) => {
         let id = req.params.id;
 
-        if (!req.isAuthenticated()){
+        if (!req.isAuthenticated()) {
             let returnUrl = `/article/edit/${id}`;
             req.session.returnUrl = returnUrl;
 
@@ -122,7 +127,7 @@ module.exports = {
 
         Article.findById(id).then(article => {
             req.user.isInRole('Admin').then(isAdmin => {
-                if (!isAdmin && !req.user.isAuthor(article)){
+                if (!isAdmin && !req.user.isAuthor(article)) {
                     res.redirect('/');
                 }
 
@@ -134,7 +139,7 @@ module.exports = {
     deletePost: (req, res) => {
         let id = req.params.id;
 
-        if (!req.isAuthenticated()){
+        if (!req.isAuthenticated()) {
             let returnUrl = `/article/edit/${id}`;
             req.session.returnUrl = returnUrl;
 

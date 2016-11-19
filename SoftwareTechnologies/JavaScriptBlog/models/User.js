@@ -13,34 +13,50 @@ let userSchema = mongoose.Schema(
     }
 );
 
-userSchema.method ({
-   authenticate: function (password) {
-       let inputPasswordHash = encryption.hashPassword(password, this.salt);
-       let isSamePasswordHash = inputPasswordHash === this.passwordHash;
+userSchema.method({
+    authenticate: function (password) {
+        let inputPasswordHash = encryption.hashPassword(password, this.salt);
+        let isSamePasswordHash = inputPasswordHash === this.passwordHash;
 
-       return isSamePasswordHash;
-   },
+        return isSamePasswordHash;
+    },
 
-   isAuthor: function (article) {
-        if (!article){
+    isAuthor: function (article) {
+        if (!article) {
             return false;
         }
 
         let isAuthor = article.author.equals(this.id);
 
-       return isAuthor;
+        return isAuthor;
     },
 
-   isInRole: function (roleName) {
-       return Role.findOne({name: roleName}).then(role => {
-           if (!role){
-               return false;
-           }
+    isInRole: function (roleName) {
+        return Role.findOne({name: roleName}).then(role => {
+            if (!role) {
+                return false;
+            }
 
-           let isInRole = this.roles.indexOf(role.id) !== -1;
-           return isInRole;
-       })
-   } 
+            let isInRole = this.roles.indexOf(role.id) !== -1;
+            return isInRole;
+        })
+    },
+
+    prepareDelete: function () {
+        for (let role of this.roles) {
+            Role.findById(role).then(role => {
+                role.users.remove(this.id);
+                role.save();
+            })
+        }
+
+        let Article = mongoose.model('Article');
+        for (let article of this.articles) {
+            Article.findById(article).then(article => {
+                article.remove();
+            })
+        }
+    }
 });
 
 const User = mongoose.model('User', userSchema);
