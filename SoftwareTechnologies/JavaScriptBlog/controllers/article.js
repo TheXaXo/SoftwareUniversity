@@ -1,8 +1,18 @@
 const Article = require('mongoose').model('Article');
+const Category = require('mongoose').model('Category');
 
 module.exports = {
     createGet: (req, res) => {
-        res.render('article/create');
+        if (!req.isAuthenticated()) {
+            let returnUrl = '/article/create';
+            req.session.returnUrl = returnUrl;
+
+            res.redirect('/user/login');
+        }
+
+        Category.find({}).then(categories => {
+            res.render('article/create', {categories: categories});
+        })
     },
 
     createPost: (req, res) => {
@@ -26,16 +36,10 @@ module.exports = {
         }
 
         articleArgs.author = req.user.id;
-        Article.create(articleArgs).then(articleArgs => {
-            req.user.articles.push(articleArgs.id);
-            req.user.save(err => {
-                if (err) {
-                    res.redirect('/', {error: err.message});
-                } else {
-                    res.redirect('/');
-                }
-            })
-        })
+        Article.create(articleArgs).then(article => {
+            article.prepareInsert();
+            res.redirect('/');
+        });
     },
 
     details: (req, res) => {
@@ -152,17 +156,8 @@ module.exports = {
                 res.redirect('/');
             } else {
                 Article.findOneAndRemove({_id: id}).populate('author').then(article => {
-                    let author = article.author;
-                    let index = author.articles.indexOf(article.id);
-
-                    if (index < 0) {
-                        res.render('article/delete', {error: 'Article was not found for that author!'});
-                    } else {
-                        author.articles.splice(index, 1);
-                        author.save().then(user => {
-                            res.redirect('/');
-                        })
-                    }
+                    article.prepareDelete();
+                    res.redirect('/');
                 })
             }
         })
