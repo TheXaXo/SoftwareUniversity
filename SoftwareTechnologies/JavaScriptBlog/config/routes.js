@@ -2,9 +2,12 @@ const userController = require('./../controllers/user');
 const homeController = require('./../controllers/home');
 const adminController = require('./../controllers/admin/admin');
 const articleController = require('./../controllers/article');
+const tagController = require('./../controllers/tag');
 
 module.exports = (app) => {
     app.get('/', homeController.index);
+
+    app.get('/category/:id', homeController.listCategoryArticles);
 
     app.get('/article/create', articleController.createGet);
     app.post('/article/create', articleController.createPost);
@@ -24,6 +27,8 @@ module.exports = (app) => {
     app.post('/user/login', userController.loginPost);
 
     app.get('/user/logout', userController.logout);
+
+    app.get('/tag/:name', tagController.listArticlesByTag);
 
     app.use((req, res, next) => {
         if (req.isAuthenticated()){
@@ -51,5 +56,11 @@ module.exports = (app) => {
 
     app.get('/admin/category/create', adminController.category.createGet);
     app.post('/admin/category/create', adminController.category.createPost);
+
+    app.get('/admin/category/edit/:id', adminController.category.editGet);
+    app.post('/admin/category/edit/:id', adminController.category.editPost);
+
+    app.get('/admin/category/delete/:id', adminController.category.deleteGet);
+    app.post('/admin/category/delete/:id', adminController.category.deletePost);
 };
 
