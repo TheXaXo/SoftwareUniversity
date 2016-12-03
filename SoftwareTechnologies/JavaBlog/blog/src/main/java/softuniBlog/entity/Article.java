@@ -1,6 +1,8 @@
 package softuniBlog.entity;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "articles")
@@ -9,6 +11,17 @@ public class Article {
     private String title;
     private String content;
     private User author;
+    private Set<Tag> tags;
+
+    @ManyToMany
+    @JoinColumn(table = "article_tags")
+    public Set<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<Tag> tags) {
+        this.tags = tags;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -48,10 +61,24 @@ public class Article {
         this.author = author;
     }
 
-    public Article(String title, String content, User author) {
+    private Category category;
+
+    @ManyToOne
+    @JoinColumn(nullable = false, name = "categoryId")
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public Article(String title, String content, User author, Category category, HashSet<Tag> tags) {
         this.title = title;
         this.content = content;
         this.author = author;
+        this.category = category;
+        this.tags = tags;
     }
 
     public Article(){};
