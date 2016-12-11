@@ -22,5 +22,10 @@ namespace ASP.NET_Blog.Models
         public string AuthorId { get; set; }
 
         public virtual ApplicationUser Author { get; set; }
+
+        public bool isAuthor(string name)
+        {
+            return this.Author.UserName.Equals(name);
+        }
     }
 }
