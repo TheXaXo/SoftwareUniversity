@@ -19,6 +19,28 @@ namespace ASP.NET_Blog.Controllers
             return isAdmin || isAuthor;
         }
 
+        private void SetArticleTags(Article article, ArticleViewModel model, BlogDbContext db)
+        {
+            var tagsStrings = model.Tags
+                .Split(new char[] { ',', ' ' }, StringSplitOptions.RemoveEmptyEntries)
+                .Select(t => t.ToLower())
+                .Distinct();
+
+            article.Tags.Clear();
+
+            foreach (var tagString in tagsStrings)
+            {
+                Tag tag = db.Tags.FirstOrDefault(t => t.Name.Equals(tagString));
+
+                if (tag == null)
+                {
+                    tag = new Tag() { Name = tagString };
+                    db.Tags.Add(tag);
+                    article.Tags.Add(tag);
+                }
+            }
+        }
+
         // GET: Article
         public ActionResult Index()
         {
@@ -31,7 +53,10 @@ namespace ASP.NET_Blog.Controllers
         {
             using (var database = new BlogDbContext())
             {
-                var articles = database.Articles.Include(a => a.Author).ToList();
+                var articles = database.Articles
+                    .Include(a => a.Author)
+                    .Include(a => a.Tags)
+                    .ToList();
 
                 return View(articles);
             }
@@ -48,7 +73,11 @@ namespace ASP.NET_Blog.Controllers
 
             using (var database = new BlogDbContext())
             {
-                var article = database.Articles.Where(a => a.Id == id).Include(a => a.Author).First();
+                var article = database.Articles
+                    .Where(a => a.Id == id)
+                    .Include(a => a.Author)
+                    .Include(a => a.Tags)
+                    .First();
 
                 if (article == null)
                 {
@@ -64,14 +93,20 @@ namespace ASP.NET_Blog.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            return View();
+            using (var database = new BlogDbContext())
+            {
+                var model = new ArticleViewModel();
+                model.Categories = database.Categories.OrderBy(c => c.Name).ToList();
+
+                return View(model);
+            }
         }
 
         //
         // POST: Article/Create
         [HttpPost]
         [Authorize]
-        public ActionResult Create(Article article)
+        public ActionResult Create(ArticleViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -82,6 +117,10 @@ namespace ASP.NET_Blog.Controllers
                         .First()
                         .Id;
 
+                    var article = new Article(authorId, model.Title, model.Content, model.CategoryId);
+
+                    this.SetArticleTags(article, model, database);
+
                     article.AuthorId = authorId;
                     database.Articles.Add(article);
                     database.SaveChanges();
@@ -90,7 +129,7 @@ namespace ASP.NET_Blog.Controllers
                 }
             }
 
-            return View(article);
+            return View(model);
         }
 
         //
@@ -107,12 +146,15 @@ namespace ASP.NET_Blog.Controllers
                 var article = databse.Articles
                     .Where(a => a.Id == id)
                     .Include(a => a.Author)
+                    .Include(a => a.Category)
                     .First();
 
                 if (!isUserAuthorizedToEdit(article))
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.Forbidden);
                 }
+
+                ViewBag.TagsString = string.Join(", ", article.Tags.Select(t => t.Name));
 
                 if (article == null)
                 {
@@ -187,6 +229,9 @@ namespace ASP.NET_Blog.Controllers
                 model.Id = article.Id;
                 model.Title = article.Title;
                 model.Content = article.Content;
+                model.CategoryId = article.CategoryId;
+                model.Categories = database.Categories.OrderBy(c => c.Name).ToList();
+                model.Tags = string.Join(", ", article.Tags.Select(t => t.Name));
 
                 return View(model);
             }
@@ -211,6 +256,9 @@ namespace ASP.NET_Blog.Controllers
 
                     article.Title = model.Title;
                     article.Content = model.Content;
+                    article.CategoryId = model.CategoryId;
+
+                    this.SetArticleTags(article, model, database);
 
                     database.Entry(article).State = EntityState.Modified;
                     database.SaveChanges();
