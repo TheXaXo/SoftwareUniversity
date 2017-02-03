@@ -132,6 +132,7 @@
     <property name="js.eslint.eslintPackage" value="" />
     <property name="js-jscs-nodeInterpreter" value="C:\Program Files\nodejs\node.exe" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../BashSoft" />
   </component>
   <component name="RunManager" selected="Application.CreateZipArchive">
     <configuration default="false" name="GetFolderSize" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -617,12 +618,12 @@
       <option name="presentableId" value="Default" />
       <updated>1485720079404</updated>
       <workItem from="1485720082017" duration="3652000" />
-      <workItem from="1485849974300" duration="1984000" />
+      <workItem from="1485849974300" duration="2252000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5636000" />
+    <option name="totallyTimeSpent" value="5904000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
