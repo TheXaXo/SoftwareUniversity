@@ -1,14 +1,11 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.LinkedList;
-import java.util.Scanner;
 
 public class IOManager {
 
     public static void main(String[] args) throws IOException {
-        Scanner console = new Scanner(System.in);
-
-        CommandInterpreter.interpretCommand(console.nextLine());
+        InputReader.readCommands();
     }
 
     public static void traverseDirectory(int depth) {

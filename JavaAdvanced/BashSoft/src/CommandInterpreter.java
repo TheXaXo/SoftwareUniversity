@@ -59,6 +59,10 @@ public class CommandInterpreter {
                 tryOpenFile(input, data);
                 break;
 
+            case "show":
+                tryShowWantedCourse(input, data);
+                break;
+
             default:
                 displayInvalidCommandMessage(input);
         }
@@ -151,6 +155,25 @@ public class CommandInterpreter {
 
         String fileName = data[1];
         StudentsRepository.initializeData(fileName);
+    }
+
+    private static void tryShowWantedCourse(String input, String[] data) {
+        if (data.length != 2 && data.length != 3) {
+            displayInvalidCommandMessage(input);
+            return;
+        }
+
+        if (data.length == 2) {
+            String courseName = data[1];
+            StudentsRepository.getStudentsByCourse(courseName);
+        }
+
+        if (data.length == 3) {
+            String courseName = data[1];
+            String userName = data[2];
+
+            StudentsRepository.getStudentMarksInCourse(courseName, userName);
+        }
     }
 
     private static void getHelp() {

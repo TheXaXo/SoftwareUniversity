@@ -2,6 +2,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class StudentsRepository {
     public static boolean isDataInitialized = false;
@@ -18,25 +20,31 @@ public class StudentsRepository {
     }
 
     private static void readData(String fileName) throws IOException {
+        Pattern p = Pattern.compile("([A-Z][A-Za-z+#]*_[A-Z][a-z]{2}_\\d{4})\\s+([A-Z][a-z]{1,3}\\d{2}_\\d{2,4})\\s+(\\d+)");
+
         String path = SessionData.currentPath + "\\" + fileName;
         List<String> lines = Files.readAllLines(Paths.get(path));
 
         for (String line : lines) {
-            String[] tokens = line.split("\\s+");
+            Matcher m = p.matcher(line);
 
-            String course = tokens[0];
-            String student = tokens[1];
-            Integer mark = Integer.parseInt(tokens[2]);
+            if (!line.isEmpty() && m.find()) {
+                String course = m.group(1);
+                String student = m.group(2);
+                int mark = Integer.parseInt(m.group(3));
 
-            if (!studentsByCourse.containsKey(course)) {
-                studentsByCourse.put(course, new HashMap<>());
+                if (mark >= 0 && mark <= 100) {
+                    if (!studentsByCourse.containsKey(course)) {
+                        studentsByCourse.put(course, new HashMap<>());
+                    }
+
+                    if (!studentsByCourse.get(course).containsKey(student)) {
+                        studentsByCourse.get(course).put(student, new ArrayList<>());
+                    }
+
+                    studentsByCourse.get(course).get(student).add(mark);
+                }
             }
-
-            if (!studentsByCourse.get(course).containsKey(student)) {
-                studentsByCourse.get(course).put(student, new ArrayList<>());
-            }
-
-            studentsByCourse.get(course).get(student).add(mark);
         }
 
         isDataInitialized = true;
