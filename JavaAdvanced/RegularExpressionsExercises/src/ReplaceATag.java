@@ -8,21 +8,29 @@ public class ReplaceATag {
     public static void main(String[] args) throws IOException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        String input = reader.readLine();
+        String line = reader.readLine();
 
         StringBuilder wholeInput = new StringBuilder();
+        while (!line.equals("END")) {
+            wholeInput.append(line).append("\r\n");
 
-        while (!input.equals("END")) {
-            wholeInput.append(input).append("\r\n");
-
-            input = reader.readLine();
+            line = reader.readLine();
         }
 
-        Pattern p = Pattern.compile("<a (href=[^>]+)>([^<]+)<\\/a>");
+        Pattern p = Pattern.compile("<a(\\s+href=[^>]*)>([^<]+)<\\/a>");
         Matcher m = p.matcher(wholeInput);
 
         while (m.find()) {
-            System.out.println(m.replaceAll("[URL " + m.group(1) + "]" + m.group(2) + "[/URL]"));
+            int matchStart = m.start();
+            int matchEnd = m.end();
+
+            String stringToReplace = "[URL" + m.group(1) + "]" + m.group(2) + "[/URL]";
+
+            wholeInput.replace(matchStart, matchEnd, stringToReplace);
+
+            m = p.matcher(wholeInput);
         }
+
+        System.out.println(wholeInput);
     }
 }

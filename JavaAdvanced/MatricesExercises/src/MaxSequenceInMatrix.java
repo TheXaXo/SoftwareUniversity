@@ -1,104 +1,95 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class MaxSequenceInMatrix {
-    public static void main(String[] args) {
-//        40/100
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        Scanner console = new Scanner(System.in);
+        String[] inputArgs = reader.readLine().split(" ");
 
-        String[] split = console.nextLine().split("\\s");
-
-        int rows = Integer.parseInt(split[0]);
-        int columns = Integer.parseInt(split[1]);
+        int rows = Integer.parseInt(inputArgs[0]);
+        int columns = Integer.parseInt(inputArgs[1]);
 
         String[][] matrix = new String[rows][columns];
 
-        for (int row = 0; row < rows; row++) {
-            String[] rowElements = console.nextLine().split("\\s");
+        for (int i = 0; i < rows; i++) {
+            String[] rowElements = reader.readLine().split(" ");
 
-            for (int col = 0; col < columns; col++) {
-                matrix[row][col] = rowElements[col];
+            for (int j = 0; j < columns; j++) {
+                matrix[i][j] = rowElements[j];
             }
         }
 
-        int maxCount = Integer.MIN_VALUE;
+        int maxSequence = Integer.MIN_VALUE;
         String maxElement = "";
-        String element = "";
 
         for (int row = 0; row < rows; row++) {
             for (int col = 0; col < columns; col++) {
-                int count = 1;
-                element = matrix[row][col];
+                int sequence = 1;
+                String element = matrix[row][col];
 
-                for (int colInner = col + 1; colInner < columns; colInner++) {
-                    if (matrix[row][col].equals(matrix[row][colInner])) {
-                        count++;
-                    } else {
-                        break;
+                for (int currentRow = row + 1; currentRow < rows; currentRow++) {
+                    if (matrix[currentRow][col].equals(element)) {
+                        sequence++;
                     }
                 }
 
-                if (count >= maxCount) {
-                    maxCount = count;
-                    maxElement = element;
-                }
-
-                count = 1;
-
-                for (int rowInner = row + 1; rowInner < rows; rowInner++) {
-                    if (matrix[row][col].equals(matrix[rowInner][col])) {
-                        count++;
-                    } else {
-                        break;
+                for (int currentRow = row - 1; currentRow >= 0; currentRow--) {
+                    if (matrix[currentRow][col].equals(element)) {
+                        sequence++;
                     }
                 }
 
-                if (count >= maxCount) {
-                    maxCount = count;
+                if (sequence >= maxSequence) {
+                    maxSequence = sequence;
                     maxElement = element;
                 }
 
-                count = 1;
+                sequence = 1;
 
-                int nextIndex = col + 1;
-
-                for (int rowInner = row + 1; rowInner < rows; rowInner++) {
-                    if (matrix[rowInner].length > nextIndex &&
-                            matrix[row][col].equals(matrix[rowInner][nextIndex])) {
-                        count++;
-                        nextIndex++;
-                    } else {
-                        break;
+                for (int currentCol = col + 1; currentCol < columns; currentCol++) {
+                    if (matrix[row][currentCol].equals(element)) {
+                        sequence++;
                     }
                 }
 
-                if (count >= maxCount) {
-                    maxCount = count;
-                    maxElement = element;
-                }
-
-                count = 1;
-
-                nextIndex = col - 1;
-
-                for (int rowInner = row + 1; rowInner < rows; rowInner++) {
-                    if (nextIndex >= 0 &&
-                            matrix[row][col].equals(matrix[rowInner][nextIndex])) {
-                        count++;
-                        nextIndex--;
-                    } else {
-                        break;
+                for (int currentCol = col - 1; currentCol >= 0; currentCol--) {
+                    if (matrix[row][currentCol].equals(element)) {
+                        sequence++;
                     }
                 }
 
-                if (count >= maxCount) {
-                    maxCount = count;
+                if (sequence >= maxSequence) {
+                    maxSequence = sequence;
                     maxElement = element;
                 }
+
+                sequence = 1;
+
+                int colCurrent = col + 1;
+
+                for (int currentRow = row + 1; currentRow < rows; currentRow++) {
+                    if (colCurrent >= columns) {
+                        break;
+                    }
+
+                    if (matrix[currentRow][colCurrent].equals(element)) {
+                        sequence++;
+                        colCurrent++;
+                    }
+                }
+
+                if (sequence >= maxSequence) {
+                    maxSequence = sequence;
+                    maxElement = element;
+                }
+
+                sequence = 1;
             }
         }
 
-        for (int i = 0; i < maxCount; i++) {
+        for (int i = 0; i < maxSequence; i++) {
             System.out.print(maxElement + ", ");
         }
     }
