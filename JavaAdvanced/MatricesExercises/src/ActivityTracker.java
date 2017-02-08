@@ -1,20 +1,23 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class ActivityTracker {
-    public static void main(String[] args) {
-        Scanner console = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         Pattern p = Pattern.compile("[0-9]+\\/([0-9]+)\\/[0-9]+ (.+?) (.+)");
 
-        int n = Integer.parseInt(console.nextLine());
+        int n = Integer.parseInt(reader.readLine());
 
         LinkedHashMap<Integer, ArrayList<Person>> monthSteps = new LinkedHashMap<>();
 
         for (int i = 0; i < n; i++) {
-            Matcher m = p.matcher(console.nextLine());
+            Matcher m = p.matcher(reader.readLine());
 
             if (!m.matches()) {
                 continue;

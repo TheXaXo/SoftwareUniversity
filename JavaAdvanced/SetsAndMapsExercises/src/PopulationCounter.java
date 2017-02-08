@@ -1,11 +1,14 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class PopulationCounter {
-    public static void main(String[] args) {
-        Scanner console = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        String command = console.nextLine();
+        String command = reader.readLine();
 
         LinkedHashMap<String, LinkedHashMap<String, Long>> countryCities = new LinkedHashMap<>();
 
@@ -28,7 +31,7 @@ public class PopulationCounter {
                 }
             }
 
-            command = console.nextLine();
+            command = reader.readLine();
         }
 
         ArrayList<Map.Entry<String, LinkedHashMap<String, Long>>> countryCitiesOrdered =

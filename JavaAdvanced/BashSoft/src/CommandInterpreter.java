@@ -36,11 +36,11 @@ public class CommandInterpreter {
                 break;
 
             case "filter":
-
+                tryPrintFilteredStudents(input, data);
                 break;
 
             case "order":
-
+                tryPrintOrderedStudents(input, data);
                 break;
 
             case "download":
@@ -173,6 +173,42 @@ public class CommandInterpreter {
             String userName = data[2];
 
             StudentsRepository.getStudentMarksInCourse(courseName, userName);
+        }
+    }
+
+    private static void tryPrintFilteredStudents(String input, String[] data) {
+        if (data.length != 3 && data.length != 4) {
+            displayInvalidCommandMessage(input);
+            return;
+        }
+
+        String course = data[1];
+        String filter = data[2];
+
+        if (data.length == 3) {
+            StudentsRepository.printFilteredStudents(course, filter, null);
+        } else {
+            Integer numberOfStudents = Integer.parseInt(data[3]);
+
+            StudentsRepository.printFilteredStudents(course, filter, numberOfStudents);
+        }
+    }
+
+    private static void tryPrintOrderedStudents(String input, String[] data) {
+        if (data.length != 3 && data.length != 4) {
+            displayInvalidCommandMessage(input);
+            return;
+        }
+
+        String course = data[1];
+        String filter = data[2];
+
+        if (data.length == 3) {
+            StudentsRepository.printOrderedStudents(course, filter, null);
+        } else {
+            Integer numberOfStudents = Integer.parseInt(data[3]);
+
+            StudentsRepository.printOrderedStudents(course, filter, numberOfStudents);
         }
     }
 

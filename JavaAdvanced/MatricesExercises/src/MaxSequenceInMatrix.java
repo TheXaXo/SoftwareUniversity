@@ -35,13 +35,7 @@ public class MaxSequenceInMatrix {
                     }
                 }
 
-                for (int currentRow = row - 1; currentRow >= 0; currentRow--) {
-                    if (matrix[currentRow][col].equals(element)) {
-                        sequence++;
-                    }
-                }
-
-                if (sequence >= maxSequence) {
+                if (sequence > maxSequence) {
                     maxSequence = sequence;
                     maxElement = element;
                 }
@@ -54,13 +48,7 @@ public class MaxSequenceInMatrix {
                     }
                 }
 
-                for (int currentCol = col - 1; currentCol >= 0; currentCol--) {
-                    if (matrix[row][currentCol].equals(element)) {
-                        sequence++;
-                    }
-                }
-
-                if (sequence >= maxSequence) {
+                if (sequence > maxSequence) {
                     maxSequence = sequence;
                     maxElement = element;
                 }
@@ -80,12 +68,30 @@ public class MaxSequenceInMatrix {
                     }
                 }
 
-                if (sequence >= maxSequence) {
+                if (sequence > maxSequence) {
                     maxSequence = sequence;
                     maxElement = element;
                 }
 
                 sequence = 1;
+
+                colCurrent = col - 1;
+
+                for (int currentRow = row + 1; currentRow < rows; currentRow++) {
+                    if (colCurrent < 0) {
+                        break;
+                    }
+
+                    if (matrix[currentRow][colCurrent].equals(element)) {
+                        sequence++;
+                        colCurrent--;
+                    }
+                }
+
+                if (sequence > maxSequence) {
+                    maxSequence = sequence;
+                    maxElement = element;
+                }
             }
         }
 

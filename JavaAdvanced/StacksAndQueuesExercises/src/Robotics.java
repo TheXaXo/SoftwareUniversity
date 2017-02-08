@@ -1,14 +1,16 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Robotics {
-    public static void main(String[] args) {
-        Scanner console = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        String[] split = console.nextLine().split(";");
+        String[] split = reader.readLine().split(";");
 
         ArrayList<Robot> robots = new ArrayList<>();
 
@@ -29,16 +31,16 @@ public class Robotics {
         }
 
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("H:mm:ss");
-        LocalTime time = LocalTime.parse(console.nextLine(), dateTimeFormatter);
+        LocalTime time = LocalTime.parse(reader.readLine(), dateTimeFormatter);
 
-        String command = console.nextLine();
+        String command = reader.readLine();
 
         ArrayDeque<String> products = new ArrayDeque<>();
 
         while (!command.equals("End")) {
             products.add(command);
 
-            command = console.nextLine();
+            command = reader.readLine();
         }
 
         while (!products.isEmpty()) {

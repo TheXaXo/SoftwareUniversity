@@ -1,16 +1,18 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayDeque;
-import java.util.Scanner;
 
 public class StockSpanProblem {
-    public static void main(String[] args) {
-        Scanner console = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        int n = Integer.parseInt(console.nextLine());
+        int n = Integer.parseInt(reader.readLine());
 
         ArrayDeque<Integer> stockPrices = new ArrayDeque<>();
 
         for (int i = 0; i < n; i++) {
-            stockPrices.push(Integer.parseInt(console.nextLine()));
+            stockPrices.push(Integer.parseInt(reader.readLine()));
 
             ArrayDeque<Integer> numbersToCheck = stockPrices.clone();
 
