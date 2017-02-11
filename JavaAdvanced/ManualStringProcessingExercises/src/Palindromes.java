@@ -32,19 +32,6 @@ public class Palindromes {
         ArrayList<String> palindromesAsList = new ArrayList<>(palindromes);
         palindromesAsList.sort(String::compareToIgnoreCase);
 
-        StringBuilder output = new StringBuilder();
-        output.append("[");
-
-        for (String word : palindromesAsList) {
-            output.append(word);
-
-            if (!palindromesAsList.get(palindromesAsList.size() - 1).equals(word)) {
-                output.append(", ");
-            } else {
-                output.append("]");
-            }
-        }
-
-        System.out.println(output);
+        System.out.println(palindromesAsList);
     }
 }

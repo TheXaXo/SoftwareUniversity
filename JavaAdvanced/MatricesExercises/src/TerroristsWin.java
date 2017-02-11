@@ -1,46 +1,52 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class TerroristsWin {
-    public static void main(String[] args) {
-        Scanner console = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        StringBuilder sb = new StringBuilder();
-        sb.append(console.nextLine());
+        StringBuilder sb = new StringBuilder(reader.readLine());
 
-        Pattern p = Pattern.compile("(\\|[^\\|]+?\\|)");
+        Pattern p = Pattern.compile("\\|([^\\|]*)\\|");
         Matcher m = p.matcher(sb);
 
         while (m.find()) {
-            String bomb = m.group(1);
+            String match = m.group();
+            String insideMatch = m.group(1);
 
-            int power = 0;
+            int sum = 0;
 
-            for (char c : bomb.toCharArray()) {
-                if (c != '|') {
-                    power += c;
-                }
+            for (char c : insideMatch.toCharArray()) {
+                sum += c;
             }
 
-            power = power % 10;
+            int countToRemove = sum % 10;
 
-            int leftIndex = sb.indexOf(bomb) - power;
-            int rightIndex = leftIndex + power + bomb.length() - 1 + power;
+            int startIndex = sb.indexOf(match) - countToRemove;
+            int endIndex = sb.indexOf(match) + match.length() + countToRemove - 1;
 
-            if (leftIndex < 0) {
-                leftIndex = 0;
+            if (startIndex < 0) {
+                startIndex = 0;
             }
 
-            if (rightIndex >= sb.length()) {
-                rightIndex = sb.length() - 1;
+            if (endIndex >= sb.length()) {
+                endIndex = sb.length() - 1;
             }
 
-            for (int i = leftIndex; i <= rightIndex; i++) {
-                sb.replace(i, i + 1, ".");
+            StringBuilder dots = new StringBuilder();
+
+            for (int i = startIndex; i <= endIndex; i++) {
+                dots.append(".");
             }
+
+            sb.replace(startIndex, endIndex + 1, dots.toString());
+
+            m = p.matcher(sb);
         }
 
-        System.out.println(sb.toString());
+        System.out.println(sb);
     }
 }

@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,11 +12,17 @@ public class SentenceExtractor {
         String keyword = reader.readLine();
         String input = reader.readLine();
 
-        Pattern p = Pattern.compile(".+?\\b" + keyword + "\\b.+?[!?\\.]");
+        Pattern p = Pattern.compile("[A-Z][^.!?]*[.!?]");
         Matcher m = p.matcher(input);
 
         while (m.find()) {
-            System.out.println(m.group().trim());
+            String[] words = m.group().split("[\\s+,:\\-\\\"\\'\\/\\\\]");
+
+            for (String word : words) {
+                if (word.equals(keyword)) {
+                    System.out.println(m.group());
+                }
+            }
         }
     }
 }
