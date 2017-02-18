@@ -1,15 +1,18 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class AshesOfRoses {
-    public static void main(String[] args) {
-        Scanner console = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
         Pattern p = Pattern.compile("Grow <([A-Z][a-z]+)> <([A-Za-z0-9]+)> ([0-9]+)");
 
-        String command = console.nextLine();
+        String command = reader.readLine();
 
         LinkedHashMap<String, LinkedHashMap<String, Long>> regionColors = new LinkedHashMap<>();
 
@@ -17,7 +20,7 @@ public class AshesOfRoses {
             Matcher m = p.matcher(command);
 
             if (!m.matches()) {
-                command = console.nextLine();
+                command = reader.readLine();
                 continue;
             }
 
@@ -40,25 +43,22 @@ public class AshesOfRoses {
                 }
             }
 
-            command = console.nextLine();
+            command = reader.readLine();
         }
 
-        ArrayList<Map.Entry<String, LinkedHashMap<String, Long>>> regionsOrdered = regionColors.entrySet().stream()
-                .sorted(Comparator.<Map.Entry<String, LinkedHashMap<String, Long>>>
-                        comparingLong(a -> a.getValue().values().stream().mapToLong(Number::longValue).sum())
+        regionColors.entrySet().stream()
+                .sorted(Comparator.<Map.Entry<String, LinkedHashMap<String, Long>>>comparingLong(pair -> pair.getValue().values().stream().mapToLong(a -> a).sum())
                         .reversed()
-                        .thenComparing(a -> a.getKey()))
-                .collect(Collectors.toCollection(ArrayList::new));
+                        .thenComparing(Map.Entry::getKey))
+                .forEach(pair -> {
+                    System.out.println(pair.getKey());
 
-        for (Map.Entry<String, LinkedHashMap<String, Long>> pair : regionsOrdered) {
-            System.out.println(pair.getKey());
-
-            pair.getValue().entrySet().stream()
-                    .sorted(Comparator.<Map.Entry<String, Long>>
-                            comparingLong(a -> a.getValue())
-                            .thenComparing(a -> a.getKey()))
-                    .forEach(colorCountPair ->
-                            System.out.printf("*--%s | %d%n", colorCountPair.getKey(), colorCountPair.getValue()));
-        }
+                    pair.getValue().entrySet().stream()
+                            .sorted(Comparator.<Map.Entry<String, Long>>comparingLong(innerPair -> innerPair.getValue())
+                                    .thenComparing(innerPair -> innerPair.getKey()))
+                            .forEach(innerPair -> {
+                                System.out.printf("*--%s | %d%n", innerPair.getKey(), innerPair.getValue());
+                            });
+                });
     }
 }
