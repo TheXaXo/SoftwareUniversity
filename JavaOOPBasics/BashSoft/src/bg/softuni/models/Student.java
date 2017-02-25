@@ -1,10 +1,11 @@
 package bg.softuni.models;
 
-import bg.softuni.io.OutputWriter;
 import bg.softuni.staticData.ExceptionMessages;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Student {
     private String userName;
@@ -12,7 +13,7 @@ public class Student {
     private LinkedHashMap<String, Double> marksByCourseName;
 
     public Student(String userName) {
-        this.userName = userName;
+        this.setUserName(userName);
         this.enrolledCourses = new LinkedHashMap<>();
         this.marksByCourseName = new LinkedHashMap<>();
     }
@@ -21,18 +22,28 @@ public class Student {
         return this.userName;
     }
 
-    public LinkedHashMap<String, Double> getMarksByCourseName() {
-        return this.marksByCourseName;
+    private void setUserName(String userName) {
+        if (userName == null || userName.equals("")) {
+            throw new IllegalArgumentException(ExceptionMessages.NULL_OR_EMPTY_VALUE);
+        }
+
+        this.userName = userName;
+    }
+
+    public Map<String, Double> getMarksByCourseName() {
+        return Collections.unmodifiableMap(this.marksByCourseName);
+    }
+
+    public Map<String, Course> getEnrolledCourses() {
+        return Collections.unmodifiableMap(this.enrolledCourses);
     }
 
     public void enrollInCourse(Course course) {
         if (this.enrolledCourses.containsKey(course.getName())) {
-            OutputWriter.displayException(String.format(
+            throw new IllegalArgumentException(String.format(
                     ExceptionMessages.STUDENT_ALREADY_ENROLLED_IN_GIVEN_COURSE,
-                    this.userName,
+                    this.getUserName(),
                     course.getName()));
-
-            return;
         }
 
         this.enrolledCourses.put(course.getName(), course);
@@ -40,16 +51,15 @@ public class Student {
 
     public void setMarkOnCourse(String courseName, int[] scores) {
         if (!this.enrolledCourses.containsKey(courseName)) {
-            OutputWriter.displayException(ExceptionMessages.STUDENT_NOT_ENROLLED_IN_COURSE);
-            return;
+            throw new IllegalArgumentException(ExceptionMessages.STUDENT_NOT_ENROLLED_IN_COURSE);
         }
 
         if (scores.length > Course.NUMBER_OF_TASKS_ON_EXAM) {
-            OutputWriter.displayException(ExceptionMessages.INVALID_NUMBER_OF_SCORES);
-            return;
+            throw new IllegalArgumentException(ExceptionMessages.INVALID_NUMBER_OF_SCORES);
         }
 
         double mark = calculateMark(scores);
+        this.marksByCourseName.put(courseName, mark);
     }
 
     private double calculateMark(int[] scores) {

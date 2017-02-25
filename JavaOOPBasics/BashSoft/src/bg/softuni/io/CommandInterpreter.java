@@ -27,6 +27,15 @@ public class CommandInterpreter {
     void interpretCommand(String input) throws IOException {
         String[] data = input.split("\\s+");
         String command = data[0].toLowerCase();
+
+        try {
+            parseCommand(input, data, command);
+        } catch (Exception ex) {
+            OutputWriter.writeMessageOnNewLine(ex.getMessage());
+        }
+    }
+
+    private void parseCommand(String input, String[] data, String command) throws IOException {
         switch (command) {
             case "open":
                 tryOpenFile(input, data);
@@ -237,7 +246,7 @@ public class CommandInterpreter {
         this.repository.loadData(fileName);
     }
 
-    private void tryChangeAbsolutePath(String input, String[] data) {
+    private void tryChangeAbsolutePath(String input, String[] data) throws IOException {
         if (data.length != 2) {
             displayInvalidCommandMessage(input);
             return;
@@ -247,7 +256,7 @@ public class CommandInterpreter {
         this.inputOutputManager.changeCurrentDirAbsolute(absolutePath);
     }
 
-    private void tryChangeRelativePath(String input, String[] data) {
+    private void tryChangeRelativePath(String input, String[] data) throws IOException {
         if (data.length != 2) {
             displayInvalidCommandMessage(input);
             return;

@@ -30,8 +30,7 @@ public class StudentsRepository {
 
     public void loadData(String fileName) throws IOException {
         if (this.isDataInitialized) {
-            OutputWriter.displayException(ExceptionMessages.DATA_ALREADY_INITIALIZED);
-            return;
+            throw new IllegalStateException(ExceptionMessages.DATA_ALREADY_INITIALIZED);
         }
 
         this.courses = new LinkedHashMap<>();
@@ -67,7 +66,7 @@ public class StudentsRepository {
 
                 try {
                     String[] splitScores = scoresStr.split("\\s+");
-                    int[] scores = new int[scoresStr.length()];
+                    int[] scores = new int[splitScores.length];
 
                     for (int i = 0; i < splitScores.length; i++) {
                         scores[i] = Integer.parseInt(splitScores[i]);

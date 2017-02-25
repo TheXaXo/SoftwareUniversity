@@ -23,5 +23,6 @@ public class ExceptionMessages {
     public static final String STUDENT_NOT_ENROLLED_IN_COURSE = "Student must be enrolled in a course before you set his mark.";
     public static final String INVALID_NUMBER_OF_SCORES = "The number of scores for the given course is greater than the possible.";
     public static final String INVALID_SCORE = "The score provided is invalid.";
+    public static final String NULL_OR_EMPTY_VALUE = "The value of the variable cannot be null or empty!";
 }
 
