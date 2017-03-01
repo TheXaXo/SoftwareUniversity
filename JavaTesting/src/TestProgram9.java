@@ -1,12 +1,15 @@
-import java.util.ArrayDeque;
-
 public class TestProgram9 {
-    public static void main(String[] args) {
-        ArrayDeque<Integer> asd = new ArrayDeque<>();
-        asd.add(2);
-        asd.add(3);
-        asd.push(4);
+    private String name;
 
-        System.out.println(asd);
+    public TestProgram9(String name) {
+        this.setName(name);
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
