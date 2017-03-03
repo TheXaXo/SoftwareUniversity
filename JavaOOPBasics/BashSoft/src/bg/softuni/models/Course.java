@@ -1,6 +1,7 @@
 package bg.softuni.models;
 
-import bg.softuni.staticData.ExceptionMessages;
+import bg.softuni.exceptions.DuplicateEntryInStructureException;
+import bg.softuni.exceptions.InvalidNameVariableException;
 
 import java.util.Collections;
 import java.util.LinkedHashMap;
@@ -24,7 +25,7 @@ public class Course {
 
     public void setName(String name) {
         if (name == null || name.equals("")) {
-            throw new IllegalArgumentException(ExceptionMessages.NULL_OR_EMPTY_VALUE);
+            throw new InvalidNameVariableException();
         }
 
         this.name = name;
@@ -36,10 +37,9 @@ public class Course {
 
     public void enrollStudent(Student student) {
         if (this.studentsByName.containsKey(student.getUserName())) {
-            throw new IllegalArgumentException(String.format(
-                    ExceptionMessages.STUDENT_ALREADY_ENROLLED_IN_GIVEN_COURSE,
-                    student.getUserName(), this.name
-            ));
+            throw new DuplicateEntryInStructureException(
+                    student.getUserName(),
+                    this.name);
         }
 
         this.studentsByName.put(student.getUserName(), student);

@@ -1,5 +1,7 @@
 package bg.softuni.io;
 
+import bg.softuni.exceptions.InvalidFileNameException;
+import bg.softuni.exceptions.InvalidPathException;
 import bg.softuni.staticData.SessionData;
 import bg.softuni.staticData.ExceptionMessages;
 
@@ -54,8 +56,7 @@ public class IOManager {
         boolean wasDirMade = file.mkdir();
 
         if (!wasDirMade) {
-            throw new IllegalArgumentException(
-                    ExceptionMessages.FORBIDDEN_SYMBOLS_CONTAINED_IN_NAME);
+            throw new InvalidFileNameException();
         }
     }
 
@@ -69,8 +70,7 @@ public class IOManager {
                 String newPath = currentPath.substring(0, indexOfLastSlash);
                 SessionData.currentPath = newPath;
             } catch (StringIndexOutOfBoundsException sioobe) {
-                throw new StringIndexOutOfBoundsException(
-                        ExceptionMessages.INVALID_DESTINATION);
+                throw new InvalidPathException();
             }
         } else {
             //Go to a given directory

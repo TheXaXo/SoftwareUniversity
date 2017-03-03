@@ -1,5 +1,8 @@
 package bg.softuni.models;
 
+import bg.softuni.exceptions.DuplicateEntryInStructureException;
+import bg.softuni.exceptions.InvalidNameVariableException;
+import bg.softuni.exceptions.KeyNotFoundException;
 import bg.softuni.staticData.ExceptionMessages;
 
 import java.util.Arrays;
@@ -24,7 +27,7 @@ public class Student {
 
     private void setUserName(String userName) {
         if (userName == null || userName.equals("")) {
-            throw new IllegalArgumentException(ExceptionMessages.NULL_OR_EMPTY_VALUE);
+            throw new InvalidNameVariableException();
         }
 
         this.userName = userName;
@@ -40,10 +43,9 @@ public class Student {
 
     public void enrollInCourse(Course course) {
         if (this.enrolledCourses.containsKey(course.getName())) {
-            throw new IllegalArgumentException(String.format(
-                    ExceptionMessages.STUDENT_ALREADY_ENROLLED_IN_GIVEN_COURSE,
+            throw new DuplicateEntryInStructureException(
                     this.getUserName(),
-                    course.getName()));
+                    course.getName());
         }
 
         this.enrolledCourses.put(course.getName(), course);
@@ -51,7 +53,7 @@ public class Student {
 
     public void setMarkOnCourse(String courseName, int[] scores) {
         if (!this.enrolledCourses.containsKey(courseName)) {
-            throw new IllegalArgumentException(ExceptionMessages.STUDENT_NOT_ENROLLED_IN_COURSE);
+            throw new KeyNotFoundException();
         }
 
         if (scores.length > Course.NUMBER_OF_TASKS_ON_EXAM) {

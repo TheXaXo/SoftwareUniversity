@@ -5,6 +5,10 @@ import java.util.ArrayList;
 public class StackOfStrings {
     private ArrayList<String> data;
 
+    public StackOfStrings() {
+        this.data = new ArrayList<>();
+    }
+
     public void push(String item) {
         data.add(item);
     }
