@@ -15,30 +15,36 @@ public class Main {
         for (int i = 0; i < n; i++) {
             String[] tokens = reader.readLine().split(";");
 
-            if (tokens.length != 3) {
+            String artist;
+            String name;
+            String[] lengthArgs;
+
+            try {
+                artist = tokens[0];
+                name = tokens[1];
+                lengthArgs = tokens[2].split(":");
+            } catch (Exception ex) {
                 System.out.println("Invalid song.");
                 continue;
             }
 
-            String artist = tokens[0];
-            String name = tokens[1];
+            int minutes;
+            int seconds;
 
-            String[] lengthArgs = tokens[2].split(":");
-
-            if (lengthArgs.length != 2) {
+            try {
+                minutes = Integer.parseInt(lengthArgs[0]);
+                seconds = Integer.parseInt(lengthArgs[1]);
+            } catch (Exception ex) {
                 System.out.println("Invalid song length.");
                 continue;
             }
-
-            int minutes = Integer.parseInt(lengthArgs[0]);
-            int seconds = Integer.parseInt(lengthArgs[1]);
 
             try {
                 Song song = new Song(artist, name, minutes, seconds);
                 playlist.addSong(song);
 
                 System.out.println("Song added.");
-            } catch (IllegalArgumentException ex) {
+            } catch (Exception ex) {
                 System.out.println(ex.getMessage());
             }
         }

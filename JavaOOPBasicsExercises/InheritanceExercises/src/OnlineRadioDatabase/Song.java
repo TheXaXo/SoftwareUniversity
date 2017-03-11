@@ -26,7 +26,7 @@ public class Song {
     }
 
     public void setArtist(String artist) {
-        if (artist.length() < 3 || artist.length() > 20) {
+        if (artist == null || artist.isEmpty() || artist.length() < 3 || artist.length() > 20) {
             throw new IllegalArgumentException("Artist name should be between 3 and 20 symbols.");
         }
 
@@ -38,7 +38,7 @@ public class Song {
     }
 
     public void setName(String name) {
-        if (name.length() < 3 || name.length() > 30) {
+        if (name == null || name.isEmpty() || name.length() < 3 || name.length() > 30) {
             throw new IllegalArgumentException("Song name should be between 3 and 30 symbols.");
         }
 

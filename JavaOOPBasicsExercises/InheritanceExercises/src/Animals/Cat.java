@@ -3,6 +3,10 @@ package Animals;
 public class Cat extends Animal {
     public Cat(String name, int age, String gender) {
         super(name, age, gender);
-        super.setSound("MiauMiau");
+    }
+
+    @Override
+    public void produceSound() {
+        System.out.println("MiauMiau");
     }
 }

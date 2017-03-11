@@ -16,20 +16,12 @@ public class Main {
 
             String name = tokens[0];
             int age = Integer.parseInt(tokens[1]);
-            String gender = tokens[2];
+            String gender;
 
             switch (animalType) {
-                case "Animal":
-                    try {
-                        Animal animal = new Animal(name, age, gender);
-                        System.out.println(animal);
-                        animal.produceSound();
-                    } catch (IllegalArgumentException ex) {
-                        System.out.println(ex.getMessage());
-                    }
-                    break;
-
                 case "Dog":
+                    gender = tokens[2];
+
                     try {
                         Dog dog = new Dog(name, age, gender);
                         System.out.println(dog);
@@ -40,6 +32,8 @@ public class Main {
                     break;
 
                 case "Cat":
+                    gender = tokens[2];
+
                     try {
                         Cat cat = new Cat(name, age, gender);
                         System.out.println(cat);
@@ -50,6 +44,8 @@ public class Main {
                     break;
 
                 case "Frog":
+                    gender = tokens[2];
+
                     try {
                         Frog frog = new Frog(name, age, gender);
                         System.out.println(frog);
@@ -61,7 +57,7 @@ public class Main {
 
                 case "Kitten":
                     try {
-                        Kitten kitten = new Kitten(name, age, gender);
+                        Kitten kitten = new Kitten(name, age);
                         System.out.println(kitten);
                         kitten.produceSound();
                     } catch (IllegalArgumentException ex) {
@@ -71,13 +67,24 @@ public class Main {
 
                 case "Tomcat":
                     try {
-                        Tomcat tomcat = new Tomcat(name, age, gender);
+                        Tomcat tomcat = new Tomcat(name, age);
                         System.out.println(tomcat);
                         tomcat.produceSound();
                     } catch (IllegalArgumentException ex) {
                         System.out.println(ex.getMessage());
                     }
                     break;
+
+                case "Animal":
+                    gender = tokens[2];
+
+                    try {
+                        Animal animal = new Animal(name, age, gender);
+                        System.out.println(animal);
+                        animal.produceSound();
+                    } catch (IllegalArgumentException ex) {
+                        System.out.println(ex.getMessage());
+                    }
 
                 default:
                     System.out.println("Invalid input!");

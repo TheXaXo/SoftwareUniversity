@@ -16,7 +16,7 @@ public class Team {
     }
 
     private void setName(String name) {
-        if (name.isEmpty() || name.trim().length() < 1) {
+        if (name == null || name.equals("null") || name.isEmpty() || name.trim().length() < 1) {
             throw new IllegalStateException("A name should not be empty.");
         }
 

@@ -4,17 +4,11 @@ public class Animal {
     private String name;
     private int age;
     private String gender;
-    private String sound;
-
-    public Animal() {
-
-    }
 
     public Animal(String name, int age, String gender) {
         this.setName(name);
         this.setAge(age);
         this.setGender(gender);
-        this.setSound("Not implemented!");
     }
 
     private String getName() {
@@ -22,7 +16,7 @@ public class Animal {
     }
 
     private void setName(String name) {
-        if (name == null || name.equals("")) {
+        if (name == null || name.trim().length() < 1 || name.isEmpty()) {
             throw new IllegalArgumentException("Invalid input!");
         }
 
@@ -34,7 +28,7 @@ public class Animal {
     }
 
     private void setAge(int age) {
-        if (age < 1) {
+        if (age < 0) {
             throw new IllegalArgumentException("Invalid input!");
         }
 
@@ -46,23 +40,15 @@ public class Animal {
     }
 
     protected void setGender(String gender) {
-        if (gender == null || gender.equals("")) {
+        if (gender == null || gender.trim().length() < 1 || gender.equals("")) {
             throw new IllegalArgumentException("Invalid input!");
         }
 
         this.gender = gender;
     }
 
-    protected String getSound() {
-        return this.sound;
-    }
-
-    protected void setSound(String sound) {
-        this.sound = sound;
-    }
-
     public void produceSound() {
-        System.out.println(this.getSound());
+        System.out.println("Not implemented!");
     }
 
     @Override

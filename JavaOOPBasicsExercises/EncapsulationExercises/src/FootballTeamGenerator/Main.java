@@ -42,6 +42,11 @@ public class Main {
                     int passing = Integer.parseInt(tokens[6]);
                     int shooting = Integer.parseInt(tokens[7]);
 
+                    if (!teams.containsKey(teamToAddTo)) {
+                        System.out.printf("Team %s does not exist.%n", teamToAddTo);
+                        break;
+                    }
+
                     Player player;
 
                     try {
@@ -51,17 +56,17 @@ public class Main {
                         break;
                     }
 
-                    if (!teams.containsKey(teamToAddTo)) {
-                        System.out.printf("Team %s does not exist.%n", teamToAddTo);
-                        break;
-                    }
-
                     teams.get(teamToAddTo).addPlayer(player);
                     break;
 
                 case "Remove":
                     String teamName = tokens[1];
                     String playerToBeRemoved = tokens[2];
+
+                    if (!teams.containsKey(teamName)) {
+                        System.out.printf("Team %s does not exist.%n", teamName);
+                        break;
+                    }
 
                     try {
                         teams.get(teamName).removePlayer(playerToBeRemoved);
