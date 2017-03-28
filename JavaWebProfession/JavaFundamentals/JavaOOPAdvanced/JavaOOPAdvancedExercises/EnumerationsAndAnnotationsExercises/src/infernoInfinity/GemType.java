@@ -1,6 +1,6 @@
 package infernoInfinity;
 
-public enum Gem {
+public enum GemType {
 
     RUBY(7, 2, 5), EMERALD(1, 4, 9), AMETHYST(2, 8, 4);
 
@@ -8,7 +8,7 @@ public enum Gem {
     private int agility;
     private int vitality;
 
-    private Gem(int strength, int agility, int vitality) {
+    private GemType(int strength, int agility, int vitality) {
         this.setStrength(strength);
         this.setAgility(agility);
         this.setVitality(vitality);

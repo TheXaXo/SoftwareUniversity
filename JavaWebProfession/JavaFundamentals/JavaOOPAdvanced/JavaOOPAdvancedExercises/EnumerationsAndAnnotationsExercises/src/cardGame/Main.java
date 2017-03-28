@@ -26,6 +26,8 @@ public class Main {
 
             Card card;
 
+            playerCards.putIfAbsent(currentPlayer, new ArrayList<>());
+
             try {
                 card = new Card(rank, suit);
             } catch (IllegalArgumentException ex) {
@@ -33,9 +35,8 @@ public class Main {
                 continue;
             }
 
-            playerCards.putIfAbsent(currentPlayer, new ArrayList<>());
 
-            if (playerCards.get(currentPlayer).stream().anyMatch(a -> a.compareTo(card) == 0)) {
+            if (playerCards.values().stream().flatMap(Collection::stream).anyMatch(a -> a.compareTo(card) == 0)) {
                 System.out.println("Card is not in the deck.");
                 continue;
             }
@@ -49,22 +50,19 @@ public class Main {
             }
         }
 
-        Optional<Card> playerOneHighestOptional = playerCards.get(playerOne).stream()
-                .sorted((a, b) -> b.compareTo(a))
-                .findFirst();
-        Optional<Card> playerTwoHighestOptional = playerCards.get(playerTwo).stream()
-                .sorted((a, b) -> b.compareTo(a))
-                .findFirst();
+        Card playerOneHighest = playerCards.get(playerOne).stream()
+                .sorted(Comparator.reverseOrder())
+                .findFirst()
+                .orElse(null);
+        Card playerTwoHighest = playerCards.get(playerTwo).stream()
+                .sorted(Comparator.reverseOrder())
+                .findFirst()
+                .orElse(null);
 
-        if (playerOneHighestOptional.isPresent() && playerTwoHighestOptional.isPresent()) {
-            Card cardPlayerOne = playerOneHighestOptional.get();
-            Card cardPlayerTwo = playerTwoHighestOptional.get();
-
-            if (cardPlayerOne.compareTo(cardPlayerTwo) > 0) {
-                System.out.printf("%s wins with %s.", playerOne, cardPlayerOne);
-            } else {
-                System.out.printf("%s wins with %s.", playerTwo, cardPlayerTwo);
-            }
+        if (playerOneHighest.compareTo(playerTwoHighest) > 0) {
+            System.out.printf("%s wins with %s.", playerOne, playerOneHighest);
+        } else {
+            System.out.printf("%s wins with %s.", playerTwo, playerTwoHighest);
         }
     }
 }

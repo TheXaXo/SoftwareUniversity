@@ -3,8 +3,7 @@ package infernoInfinity;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -12,52 +11,54 @@ public class Main {
 
         String command = reader.readLine();
 
-        Map<String, Weapon> nameWeapon = new LinkedHashMap<>();
+        WeaponManager manager = new WeaponManager();
+
+        CustomAnnotation annotation = Weapon.class.getDeclaredAnnotation(CustomAnnotation.class);
 
         while (!command.equals("END")) {
             String[] tokens = command.split(";");
 
+            if (tokens.length == 1) {
+                if (tokens[0].equals("Description")) {
+                    tokens[0] = "Class description";
+                }
+
+                System.out.print(tokens[0] + ": ");
+
+                switch (tokens[0]) {
+                    case "Author":
+                        System.out.println(annotation.author());
+                        break;
+                    case "Revision":
+                        System.out.println(annotation.revision());
+                        break;
+                    case "Class description":
+                        System.out.println(annotation.description());
+                        break;
+                    case "Reviewers":
+                        System.out.println(String.join(", ", Arrays.asList(annotation.reviewers())));
+                        break;
+                }
+
+                command = reader.readLine();
+                continue;
+            }
+
             switch (tokens[0]) {
                 case "Create":
-                    String type = tokens[1];
-                    String name = tokens[2];
-
-                    Weapon weapon = Weapon.valueOf(type);
-                    weapon.setName(name);
-
-                    nameWeapon.put(name, weapon);
-
+                    manager.create(tokens[1], tokens[2]);
                     break;
                 case "Add":
-                    name = tokens[1];
-                    int index = Integer.parseInt(tokens[2]);
-                    String gemType = tokens[3];
-
-                    Gem gem = Gem.valueOf(gemType);
-
-                    try {
-                        nameWeapon.get(name).add(gem, index);
-                    } catch (IllegalArgumentException ex) {
-                        break;
-                    }
-
+                    manager.add(tokens[1], Integer.parseInt(tokens[2]), tokens[3]);
                     break;
                 case "Remove":
-                    name = tokens[1];
-                    index = Integer.parseInt(tokens[2]);
-
-                    try {
-                        nameWeapon.get(name).remove(index);
-                    } catch (IllegalArgumentException ex) {
-                        break;
-                    }
-
+                    manager.remove(tokens[1], Integer.parseInt(tokens[2]));
                     break;
                 case "Print":
-                    name = tokens[1];
-
-                    System.out.println(nameWeapon.get(name));
-
+                    manager.print(tokens[1]);
+                    break;
+                case "Compare":
+                    manager.compare(tokens[1], tokens[2]);
                     break;
             }
 

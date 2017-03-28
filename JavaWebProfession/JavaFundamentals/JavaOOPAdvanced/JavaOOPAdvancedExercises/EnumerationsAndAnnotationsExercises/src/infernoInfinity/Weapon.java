@@ -1,124 +1,107 @@
 package infernoInfinity;
 
-public enum Weapon {
+import java.util.Arrays;
+import java.util.Objects;
 
-    AXE(5, 10, 4), SWORD(4, 6, 3), KNIFE(3, 4, 2);
+@CustomAnnotation(
+        author = "Pesho",
+        revision = 3,
+        description = "Used for Java OOP Advanced course - Enumerations and Annotations.",
+        reviewers = {"Pesho", "Svetlio"})
+public class Weapon implements Comparable<Weapon> {
 
     private String name;
-    private int minDamage;
-    private int maxDamage;
-    private int socketsCount;
-    private Gem[] socketContains;
+    private WeaponType type;
+    private GemType[] gems;
 
-    private int strength;
-    private int agility;
-    private int vitality;
-
-    private Weapon(int minDamage, int maxDamage, int sockets) {
-        this.setMinDamage(minDamage);
-        this.setMaxDamage(maxDamage);
-        this.setSocketsCount(sockets);
-        this.socketContains = new Gem[this.getSocketsCount()];
+    public Weapon(String name, String type) {
+        this.setName(name);
+        this.setType(type);
+        this.gems = new GemType[this.getType().getSockets()];
     }
 
-    public String getName() {
+    private String getName() {
         return this.name;
     }
 
-    public void setName(String name) {
+    private void setName(String name) {
         this.name = name;
     }
 
-    public int getMinDamage() {
-        return this.minDamage;
+    private WeaponType getType() {
+        return this.type;
     }
 
-    private void setMinDamage(int minDamage) {
-        this.minDamage = minDamage;
+    private void setType(String type) {
+        this.type = WeaponType.valueOf(type);
     }
 
-    public int getMaxDamage() {
-        return this.maxDamage;
+    private void setGems(GemType[] gems) {
+        this.gems = gems;
     }
 
-    private void setMaxDamage(int maxDamage) {
-        this.maxDamage = maxDamage;
+    private int calculateStrength() {
+        return Arrays.stream(this.gems).filter(Objects::nonNull).mapToInt(GemType::getStrength).sum();
     }
 
-    public int getSocketsCount() {
-        return this.socketsCount;
+    private int calculateAgility() {
+        return Arrays.stream(this.gems).filter(Objects::nonNull).mapToInt(GemType::getAgility).sum();
     }
 
-    private void setSocketsCount(int socketsCount) {
-        this.socketsCount = socketsCount;
+    private int calculateVitality() {
+        return Arrays.stream(this.gems).filter(Objects::nonNull).mapToInt(GemType::getVitality).sum();
     }
 
-    private int getStrength() {
-        return this.strength;
+    private int calculateMinDamage() {
+        return this.getType().getMinDamage() + 2 * this.calculateStrength()
+                + this.calculateAgility();
     }
 
-    private void setStrength(int strength) {
-        this.strength = strength;
+    private int calculateMaxDamage() {
+        return this.getType().getMaxDamage() + 3 * this.calculateStrength() +
+                4 * this.calculateAgility();
     }
 
-    private int getAgility() {
-        return this.agility;
+    private double calculateLevel() {
+        return (this.calculateMinDamage() + this.calculateMaxDamage()) / 2d +
+                this.calculateStrength() + this.calculateAgility() + this.calculateVitality();
     }
 
-    private void setAgility(int agility) {
-        this.agility = agility;
-    }
-
-    private int getVitality() {
-        return this.vitality;
-    }
-
-    private void setVitality(int vitality) {
-        this.vitality = vitality;
-    }
-
-    public void add(Gem gem, int index) {
-        if (index < 0 || index >= this.getSocketsCount()) {
+    public void add(String gemType, int index) {
+        if (index < 0 || index >= this.gems.length) {
             throw new IllegalArgumentException("Invalid index.");
         }
 
-        if (this.socketContains[index] != null) {
-            this.remove(index);
-        }
+        GemType gem = GemType.valueOf(gemType);
 
-        this.socketContains[index] = gem;
-
-        this.setMinDamage(this.getMinDamage() + 2 * gem.getStrength() + gem.getAgility());
-        this.setMaxDamage(this.getMaxDamage() + 3 * gem.getStrength() + 4 * gem.getAgility());
-
-        this.setStrength(this.getStrength() + gem.getStrength());
-        this.setAgility(this.getAgility() + gem.getAgility());
-        this.setVitality(this.getVitality() + gem.getVitality());
+        this.gems[index] = gem;
     }
 
     public void remove(int index) {
-        if (index < 0 || index >= this.getSocketsCount()) {
+        if (index < 0 || index >= this.gems.length) {
             throw new IllegalArgumentException("Invalid index.");
         }
 
-        if (this.socketContains[index] != null) {
-            Gem gemToBeRemoved = this.socketContains[index];
+        this.gems[index] = null;
+    }
 
-            this.setMinDamage(this.getMinDamage() - 2 * gemToBeRemoved.getStrength() - gemToBeRemoved.getAgility());
-            this.setMaxDamage(this.getMaxDamage() - 3 * gemToBeRemoved.getStrength() - 4 * gemToBeRemoved.getAgility());
-
-            this.setStrength(this.getStrength() - gemToBeRemoved.getStrength());
-            this.setAgility(this.getAgility() - gemToBeRemoved.getAgility());
-            this.setVitality(this.getVitality() - gemToBeRemoved.getVitality());
-        }
-
-        this.socketContains[index] = null;
+    public String printComparable() {
+        return this.toString() + String.format(" (Item Level: %.1f)", this.calculateLevel());
     }
 
     @Override
     public String toString() {
         return String.format("%s: %d-%d Damage, +%d Strength, +%d Agility, +%d Vitality",
-                this.getName(), this.getMinDamage(), this.getMaxDamage(),
-                this.getStrength(), this.getAgility(), this.getVitality());
+                this.getName(),
+                this.calculateMinDamage(),
+                this.calculateMaxDamage(),
+                this.calculateStrength(),
+                this.calculateAgility(),
+                this.calculateVitality());
+    }
+
+    @Override
+    public int compareTo(Weapon o) {
+        return Double.compare(this.calculateLevel(), o.calculateLevel());
     }
 }
