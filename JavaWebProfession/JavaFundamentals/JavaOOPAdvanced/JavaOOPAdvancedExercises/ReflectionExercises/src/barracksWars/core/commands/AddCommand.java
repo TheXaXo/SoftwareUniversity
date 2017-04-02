@@ -1,5 +1,6 @@
 package barracksWars.core.commands;
 
+import barracksWars.annotations.ClassName;
 import barracksWars.annotations.Inject;
 import barracksWars.contracts.Repository;
 import barracksWars.contracts.Unit;
@@ -7,6 +8,7 @@ import barracksWars.contracts.UnitFactory;
 
 import java.lang.reflect.InvocationTargetException;
 
+@ClassName("add")
 public class AddCommand extends Command {
 
     @Inject

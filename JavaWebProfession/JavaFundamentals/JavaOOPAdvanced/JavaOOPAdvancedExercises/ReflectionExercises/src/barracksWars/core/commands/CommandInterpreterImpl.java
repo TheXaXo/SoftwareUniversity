@@ -1,11 +1,13 @@
 package barracksWars.core.commands;
 
+import barracksWars.annotations.ClassName;
 import barracksWars.annotations.Inject;
 import barracksWars.contracts.CommandInterpreter;
 import barracksWars.contracts.Executable;
 import barracksWars.contracts.Repository;
 import barracksWars.contracts.UnitFactory;
 
+import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -22,17 +24,34 @@ public class CommandInterpreterImpl implements CommandInterpreter {
 
     @Override
     public Executable interpretCommand(String[] data, String commandName) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        Class<?> executableClass = Class.forName("barracksWars.core.commands." +
-                Character.toUpperCase(data[0].charAt(0)) +
-                data[0].substring(1) + "Command");
+        File classesFolder = new File("src/barracksWars/core/commands");
 
-        Constructor executableClassConstructor = executableClass.getDeclaredConstructor(data.getClass());
+        Executable executableObject = null;
 
-        executableClassConstructor.setAccessible(true);
+        for (File file : classesFolder.listFiles()) {
+            if (!file.getName().endsWith(".java")) {
+                continue;
+            }
 
-        Executable executableObject = (Executable) executableClassConstructor.newInstance((Object) data);
+            String className = file.getName().substring(0, file.getName().lastIndexOf("."));
 
-        injectDependency(executableClass, executableObject);
+            Class<?> executableClass = Class.forName("barracksWars.core.commands." + className);
+
+            if (!executableClass.isAnnotationPresent(ClassName.class)) {
+                continue;
+            }
+
+            if (executableClass.getDeclaredAnnotation(ClassName.class).value().equals(commandName)) {
+                Constructor executableClassConstructor = executableClass.getDeclaredConstructor(data.getClass());
+
+                executableClassConstructor.setAccessible(true);
+
+                executableObject = (Executable) executableClassConstructor.newInstance((Object) data);
+
+                this.injectDependency(executableClass, executableObject);
+            }
+        }
+
 
         return executableObject;
     }

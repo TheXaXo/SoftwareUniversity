@@ -1,10 +1,12 @@
 package barracksWars.core.commands;
 
+import barracksWars.annotations.ClassName;
 import barracksWars.annotations.Inject;
 import barracksWars.contracts.Repository;
 
 import java.lang.reflect.InvocationTargetException;
 
+@ClassName("report")
 public class ReportCommand extends Command {
 
     @Inject
