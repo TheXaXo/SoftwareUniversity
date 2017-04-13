@@ -81,20 +81,20 @@ public class RaceImpl implements Race {
         List<Boat> raceRegisteredParticipants = this.getRegisteredBoatsRepository().getItems();
 
         for (int i = 0; i < winnersCount; i++) {
-            Double bestTime = Double.MAX_VALUE;
+            Double bestTime = null;
             Boat winner = null;
 
             for (Boat participant : raceRegisteredParticipants) {
                 double raceTime = participant.getRaceTime(this);
 
-                if (raceTime < bestTime) {
+                if (raceTime < 0) {
+                    raceTime = DID_NOT_FINISH_TIME;
+                }
+
+                if (bestTime == null || raceTime < bestTime) {
                     bestTime = raceTime;
                     winner = participant;
                 }
-            }
-
-            if (bestTime < 0) {
-                bestTime = DID_NOT_FINISH_TIME;
             }
 
             winnersTime.put(winner, bestTime);
