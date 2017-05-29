@@ -60,10 +60,10 @@ function figureArea(width1, height1, width2, height2) {
 }
 
 function nextDay(year, month, day) {
-    let date = new Date(year, month, day);
+    let date = new Date(year, month - 1, day);
     date.setDate(date.getDate() + 1);
 
-    console.log(`${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`);
+    console.log(`${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`);
 }
 
 function distanceBetweenPoints(x1, y1, x2, y2) {
