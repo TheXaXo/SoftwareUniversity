@@ -205,7 +205,7 @@ function cityMarkets(arr) {
 }
 
 function lowestPricesInCities(arr) {
-    let productLowestPrice = new Map();
+    let productsLowestPrice = new Map();
 
     for (let line of arr) {
         let tokens = line.split(" | ");
@@ -213,26 +213,24 @@ function lowestPricesInCities(arr) {
         let productName = tokens[1];
         let price = Number(tokens[2]);
 
-        if (!productLowestPrice.has(productName)) {
-            productLowestPrice.set(productName, new Map());
-        }
-
-        if (productLowestPrice.get(productName).size === 0) {
-            productLowestPrice.get(productName).set(price, townName);
+        if (!productsLowestPrice.has(productName)) {
+            productsLowestPrice.set(productName, {town: townName, price: price});
         } else {
-            let currentPrice = [...productLowestPrice.get(productName)][0][0];
+            let productObject = productsLowestPrice.get(productName);
 
-            if (price < currentPrice) {
-                productLowestPrice.get(productName).delete(currentPrice);
-                productLowestPrice.get(productName).set(price, townName);
+            if (productObject.town === townName) {
+                productObject.price = price;
+            } else if (price < productObject.price) {
+                productObject.town = townName;
+                productObject.price = price;
             }
         }
     }
 
     let output = "";
 
-    for (let productPricePair of productLowestPrice) {
-        output += `${productPricePair[0]} -> ${[...productPricePair[1]][0][0]} (${[...productPricePair[1]][0][1]})\n`;
+    for (let pair of productsLowestPrice) {
+        output += `${pair[0]} -> ${pair[1].price} (${pair[1].town})\n`;
     }
 
     return output;
