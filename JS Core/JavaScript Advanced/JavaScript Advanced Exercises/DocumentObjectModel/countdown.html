@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="time" style="border:3px solid blue; text-align:center; font-size:2em;" disabled="true"/>
+<script>window.onload = function () {
+    countdown(550);
+
+    function countdown(seconds) {
+        let time = new Date(0, 0, 0, 0, 0, seconds, 0);
+        let textField = document.getElementById('time');
+
+        let timer = setInterval(function () {
+            time.setTime(time.getTime() - 1000);
+            let seconds = time.getSeconds();
+
+            if (seconds < 10) {
+                seconds = '0' + seconds;
+            }
+
+            textField.value = time.getMinutes() + ":" + seconds;
+        }, 1000);
+    }
+}</script>
+</body>
+</html>
