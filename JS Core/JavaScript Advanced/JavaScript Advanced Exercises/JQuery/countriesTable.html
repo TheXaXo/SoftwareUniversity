@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Countries Table</title>
+    <style>
+        td, th {
+            background: #DDD;
+            padding: 5px 10px
+        }
+
+        input[type='text'] {
+            width: 60px
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous">
+
+    </script>
+</head>
+<body onload="initializeTable()">
+<table id="countriesTable">
+    <tr>
+        <th>Country</th>
+        <th>Capital</th>
+        <th>Action</th>
+    </tr>
+    <tr>
+        <td><input type="text" id="newCountryText"/></td>
+        <td><input type="text" id="newCapitalText"/></td>
+        <td><a href="#" id="createLink">[Create]</a></td>
+    </tr>
+</table>
+<script>
+    function initializeTable() {
+        $('#createLink').click(insertRow);
+        insertRowWithParams("Bulgaria", "Sofia");
+        insertRowWithParams("Germany", "Berlin");
+        insertRowWithParams("Russia", "Moscow");
+
+        function insertRowWithParams(countryName, capitalName) {
+            let row = $('<tr>');
+
+            let country = $('<td>');
+            country.text(countryName);
+
+            let capital = $('<td>');
+            capital.text(capitalName);
+
+            let actions = $('<td>');
+
+            let upAction = $('<a>');
+            upAction.attr('href', '#');
+            upAction.text('[Up] ');
+            upAction.click(moveUp);
+
+            let downAction = $('<a>');
+            downAction.attr('href', '#');
+            downAction.text('[Down] ');
+            downAction.click(moveDown);
+
+            let deleteAction = $('<a>');
+            deleteAction.attr('href', '#');
+            deleteAction.text('[Delete]');
+            deleteAction.click(deleteRow);
+
+            actions.append(upAction);
+            actions.append(downAction);
+            actions.append(deleteAction);
+
+            row.append(country);
+            row.append(capital);
+            row.append(actions);
+
+            $('#countriesTable').append(row);
+            rearrangeButtons();
+        }
+
+        function insertRow() {
+            insertRowWithParams($('#newCountryText').val(), $('#newCapitalText').val());
+        }
+
+        function moveUp() {
+            let row = $(this).parent().parent();
+            row.insertBefore(row.prev());
+            rearrangeButtons();
+        }
+
+        function moveDown() {
+            let row = $(this).parent().parent();
+            row.insertAfter(row.next());
+            rearrangeButtons();
+        }
+
+        function deleteRow() {
+            $(this).parent().parent().remove();
+            rearrangeButtons();
+        }
+
+        function rearrangeButtons() {
+            $('a').show();
+            $('tr:last-child a:contains(Down)').hide();
+            $('tr:nth-child(3) a:contains(Up)').hide();
+        }
+    }
+</script>
+</body>
+</html>
