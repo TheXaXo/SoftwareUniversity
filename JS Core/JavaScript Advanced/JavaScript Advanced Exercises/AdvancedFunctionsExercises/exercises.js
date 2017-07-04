@@ -276,7 +276,7 @@ function monkeyPatcher(action) {
 
             if (totalVotes < 10) {
                 rating = "new";
-            } else if (upvotesToReport > (66 / 100) * totalVotes) {
+            } else if (this.upvotes > (66 / 100) * totalVotes) {
                 rating = "hot";
             } else if ((this.upvotes > 100 || this.downvotes > 100) && balance >= 0) {
                 rating = "controversial";
