@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>XmlHttpRequest Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<button onclick="loadRepos()">Load Repos</button>
+<div id="res"></div>
+<script>
+    function loadRepos() {
+        let req = {
+            url: "https://api.github.com/users/testnakov/repos",
+            success: function (data) {
+                $('#res').text(JSON.stringify(data));
+            }
+        };
+
+        $.ajax(req);
+    }
+</script>
+</body>
+</html>
