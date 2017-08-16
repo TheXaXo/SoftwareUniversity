@@ -1,15 +1,15 @@
 let auth = (() => {
     function saveSession(userInfo) {
-        let userAuth = userInfo._kmd.authtoken;
-        sessionStorage.setItem('authtoken', userAuth);
-        let userId = userInfo._id;
-        sessionStorage.setItem('userId', userId);
         let username = userInfo.username;
+        let userAuth = userInfo._kmd.authtoken;
+        let userId = userInfo._id;
+
+        sessionStorage.setItem('authtoken', userAuth);
+        sessionStorage.setItem('userId', userId);
         sessionStorage.setItem('username', username);
         sessionStorage.setItem('teamId', userInfo.teamId);
     }
 
-    // user/login
     function login(username, password) {
         let userData = {
             username,
@@ -19,8 +19,7 @@ let auth = (() => {
         return requester.post('user', 'login', 'basic', userData);
     }
 
-    // user/register
-    function register(username, password, repeatPassword) {
+    function register(username, password) {
         let userData = {
             username,
             password
@@ -29,7 +28,6 @@ let auth = (() => {
         return requester.post('user', '', 'basic', userData);
     }
 
-    // user/logout
     function logout() {
         let logoutData = {
             authtoken: sessionStorage.getItem('authtoken')
