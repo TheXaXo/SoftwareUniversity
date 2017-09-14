@@ -1,0 +1,14 @@
+<section id="viewMyPosts">
+    <div class="post post-content">
+        <h1>Your Posts</h1>
+    </div>
+    <div class="posts">
+        {{#if posts}}
+            {{#each posts}}
+                {{> post}}
+            {{/each}}
+        {{else}}
+            <p>No posts in database.</p>
+        {{/if}}
+    </div>
+</section>
