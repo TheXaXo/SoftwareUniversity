@@ -179,4 +179,88 @@ public class EntityManager<E> implements DbContext<E> {
             return value;
         }
     }
+
+    private void doCreate(Class entity) throws SQLException {
+        Entity tableNameAnnotation = (Entity) entity.getDeclaredAnnotation(Entity.class);
+        String tableName = tableNameAnnotation.name();
+        String query = "CREATE TABLE " + tableName + "( ";
+        String columns = "";
+        Field[] allFields = entity.getDeclaredFields();
+
+        for (Field field : allFields) {
+            field.setAccessible(true);
+            String type = getMySQLDataTypeFromField(field);
+            String name = field.getDeclaredAnnotation(Column.class).name();
+
+            if (field.isAnnotationPresent(Id.class)) {
+                columns += name + " INTEGER PRIMARY KEY AUTO_INCREMENT, ";
+                continue;
+            }
+
+            columns += name + " " + type + ", ";
+        }
+
+        columns = columns.substring(0, columns.length() - 2);
+        query = query + columns + ");";
+        this.connection.prepareStatement(query).execute();
+    }
+
+    private void doAlter(Class entity) throws SQLException {
+        Entity tableNameAnnotation = (Entity) entity.getDeclaredAnnotation(Entity.class);
+        String tableName = tableNameAnnotation.name();
+        String query = "ALTER TABLE " + tableName + " ";
+
+        for (Field field : entity.getDeclaredFields()) {
+            field.setAccessible(true);
+
+            if (checkIfFieldExistsInDatabase(field, tableName)) {
+                continue;
+            }
+
+            query += "ADD COLUMN " + field.getDeclaredAnnotation(Column.class).name() + " " + getMySQLDataTypeFromField(field) + ", ";
+        }
+
+        query = query.substring(0, query.length() - 2);
+        query += ";";
+        connection.prepareStatement(query).execute();
+    }
+
+    private void doDelete(Class entity, String where) throws SQLException {
+        Entity tableNameAnnotation = (Entity) entity.getDeclaredAnnotation(Entity.class);
+        String tableName = tableNameAnnotation.name();
+        String query = "DELETE FROM " + tableName + " WHERE " + where + ";";
+
+        connection.prepareStatement(query).execute();
+    }
+
+    private boolean checkIfFieldExistsInDatabase(Field field, String tableName) throws SQLException {
+        ResultSet allColumns = connection.prepareStatement(String.format("SELECT `COLUMN_NAME` AS column_name\n" +
+                "FROM `INFORMATION_SCHEMA`.`COLUMNS` \n" +
+                "WHERE `TABLE_SCHEMA`='%s' \n" +
+                "AND `TABLE_NAME`='%s';", Connector.getDatabaseName(), tableName))
+                .executeQuery();
+
+        while (allColumns.next()) {
+            String columnName = allColumns.getString("column_name");
+
+            if (columnName.equals(field.getDeclaredAnnotation(Column.class).name())) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private String getMySQLDataTypeFromField(Field field) {
+        switch (field.getType().getSimpleName()) {
+            case "int":
+                return "INTEGER";
+            case "String":
+                return "VARCHAR(50)";
+            case "Date":
+                return "DATE";
+        }
+
+        return null;
+    }
 }

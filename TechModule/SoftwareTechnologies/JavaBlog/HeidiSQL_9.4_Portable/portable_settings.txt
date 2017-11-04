@@ -49,6 +49,7 @@ ColPositions_MainForm.ListTables<|||>1<|||>0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
 ColSort_MainForm.ListTables<|||>1<|||>0,0
 SessionManager_WindowWidth<|||>3<|||>870
 SessionManager_WindowHeight<|||>3<|||>523
+SQLHelp_WindowLeft<|||>3<|||>1920
 Servers\Unnamed\SessionCreated<|||>1<|||>2016-10-31 14:03:39
 Servers\Unnamed\Host<|||>1<|||>127.0.0.1
 Servers\Unnamed\WindowsAuth<|||>3<|||>0
@@ -77,8 +78,11 @@ Servers\Unnamed\SSL_Key<|||>1<|||>
 Servers\Unnamed\SSL_Cert<|||>1<|||>
 Servers\Unnamed\SSL_CA<|||>1<|||>
 Servers\Unnamed\SSL_Cipher<|||>1<|||>
-Servers\Unnamed\ServerVersionFull<|||>1<|||>10.1.13-MariaDB - mariadb.org binary distribution
-Servers\Unnamed\ConnectCount<|||>3<|||>10
-Servers\Unnamed\ServerVersion<|||>3<|||>100113
-Servers\Unnamed\LastConnect<|||>1<|||>2016-12-03 21:47:35
+Servers\Unnamed\ServerVersionFull<|||>1<|||>10.1.26-MariaDB - mariadb.org binary distribution
+Servers\Unnamed\ConnectCount<|||>3<|||>11
+Servers\Unnamed\ServerVersion<|||>3<|||>100126
+Servers\Unnamed\LastConnect<|||>1<|||>2017-11-04 19:57:36
 Servers\Unnamed\lastUsedDB<|||>1<|||>javablog
+Servers\Unnamed\QueryHistory\1<|||>1<|||>2017-11-04 19:57:46||0|CREATE DATABASE orm_db;
+Servers\Unnamed\QueryHistory\2<|||>1<|||>2017-11-04 20:23:38|orm_db|47|SELECT `COLUMN_NAME` <{{{><}}}>FROM `INFORMATION_SCHEMA`.`COLUMNS` <{{{><}}}>WHERE `TABLE_SCHEMA`='orm_db' <{{{><}}}>    AND `TABLE_NAME`='users';
+Servers\Unnamed\QueryHistory\3<|||>1<|||>2017-11-04 20:25:33|orm_db|15|SELECT `COLUMN_NAME` AS columns<{{{><}}}>FROM `INFORMATION_SCHEMA`.`COLUMNS` <{{{><}}}>WHERE `TABLE_SCHEMA`='orm_db' <{{{><}}}>AND `TABLE_NAME`='users';
