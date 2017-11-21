@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
 
 @SpringBootApplication
 @Component
@@ -27,6 +28,10 @@ public class ConsoleRunner implements CommandLineRunner {
     public void run(String... strings) throws Exception {
         User user = new User("Pesho", 12);
         Account account = new Account(new BigDecimal("100"), user);
+        user.setAccounts(new HashSet<Account>());
+        user.getAccounts().add(account);
+
+        System.out.println(user.getAccounts());
 
         this.userService.registerUser(user);
     }
