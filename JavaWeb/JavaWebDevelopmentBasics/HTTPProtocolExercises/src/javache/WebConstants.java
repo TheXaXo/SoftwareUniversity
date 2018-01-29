@@ -13,7 +13,10 @@ public class WebConstants {
 
     public static final String CONTENT_DISPOSITION_VALUE_INLINE = "inline";
 
-    public static final String RESOURCES_FOLDER = "C:\\Users\\TheXaXo\\Documents\\SoftwareUniversity\\JavaWeb\\JavaWebDevelopmentBasics\\HTTPProtocolExercises\\src\\javache\\resources\\pages";
+    public static final String PAGES_FOLDER = "C:\\Users\\TheXaXo\\Documents\\SoftwareUniversity\\JavaWeb\\JavaWebDevelopmentBasics\\HTTPProtocolExercises\\src\\javache\\resources\\pages";
+
+    public static final String ASSETS_FOLDER = "C:\\Users\\TheXaXo\\Documents\\SoftwareUniversity\\JavaWeb\\JavaWebDevelopmentBasics\\HTTPProtocolExercises\\src\\javache\\resources\\assets";
+
 
     private WebConstants() {
     }

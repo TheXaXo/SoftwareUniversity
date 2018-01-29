@@ -57,8 +57,7 @@ public class HttpRequestImpl implements HttpRequest {
 
     @Override
     public boolean isResource() {
-        //TODO implement
-        return false;
+        return this.requestUrl.contains(".");
     }
 
     private void parseRequestContent(String requestContent) {

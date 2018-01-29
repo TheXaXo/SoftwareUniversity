@@ -4,10 +4,7 @@ import javache.http.HttpRequestImpl;
 import javache.http.HttpResponseImpl;
 
 import java.io.IOException;
-import java.nio.file.AccessDeniedException;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Paths;
+import java.nio.file.*;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -25,23 +22,41 @@ public class RequestHandler {
         HttpRequestImpl request = new HttpRequestImpl(requestContent);
         HttpResponseImpl response = new HttpResponseImpl();
 
-        byte[] content = this.getResource(request.getRequestUrl());
+        byte[] content = this.getResource(request);
 
         response.setContent(content);
         response.setStatusCode(this.resourceStatusCode);
         response.addHeader(WebConstants.CONTENT_TYPE_HEADER, this.getContentType());
         response.addHeader(WebConstants.CONTENT_DISPOSITION_HEADER, WebConstants.CONTENT_DISPOSITION_VALUE_INLINE);
-        response.addHeader(WebConstants.CONTENT_LENGTH_HEADER, Integer.toString(content.length));
+
+        if (content != null) {
+            response.addHeader(WebConstants.CONTENT_LENGTH_HEADER, Integer.toString(content.length));
+        }
 
         return response.getBytes();
     }
 
-    private byte[] getResource(String resourceName) {
+    private byte[] getResource(HttpRequestImpl request) {
+        Path filePath;
+        String resourceName = request.getRequestUrl();
+
+        if (request.isResource()) {
+            filePath = Paths.get(WebConstants.ASSETS_FOLDER + resourceName);
+        } else {
+            filePath = Paths.get(WebConstants.PAGES_FOLDER + resourceName + ".html");
+        }
+
         byte[] fileByteData = null;
 
         try {
-            fileByteData = Files.readAllBytes(Paths.get(WebConstants.RESOURCES_FOLDER + resourceName));
-            this.resourceExtension = resourceName.substring(resourceName.lastIndexOf(".") + 1);
+            fileByteData = Files.readAllBytes(filePath);
+            String resourceExtension = resourceName.substring(resourceName.lastIndexOf(".") + 1);
+
+            if (resourceExtension.equals(resourceName)) {
+                resourceExtension = "html";
+            }
+
+            this.resourceExtension = resourceExtension;
             this.resourceSize = fileByteData.length;
             this.resourceStatusCode = 200;
         } catch (NoSuchFileException e) {

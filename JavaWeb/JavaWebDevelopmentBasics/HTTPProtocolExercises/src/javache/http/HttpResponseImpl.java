@@ -61,33 +61,37 @@ public class HttpResponseImpl implements HttpResponse {
 
         byte[] responseLineAsBytes = responseLineSb.toString().getBytes();
 
-        //Headers
-        StringBuilder headersSb = new StringBuilder();
+        if (this.statusCode == 200) {
+            //Headers
+            StringBuilder headersSb = new StringBuilder();
 
-        for (Map.Entry<String, String> headerValue : this.getHeaders().entrySet()) {
-            headersSb.append(headerValue.getKey()).append(headerValue.getValue()).append(System.lineSeparator());
+            for (Map.Entry<String, String> headerValue : this.getHeaders().entrySet()) {
+                headersSb.append(headerValue.getKey()).append(headerValue.getValue()).append(System.lineSeparator());
+            }
+
+            headersSb.append(System.lineSeparator());
+
+            byte[] headersAsBytes = headersSb.toString().getBytes();
+
+            //Full data
+            byte[] fullResponseByteData = new byte[responseLineAsBytes.length + headersAsBytes.length + this.getContent().length];
+
+            for (int i = 0; i < responseLineAsBytes.length; i++) {
+                fullResponseByteData[i] = responseLineAsBytes[i];
+            }
+
+            for (int i = 0; i < headersAsBytes.length; i++) {
+                fullResponseByteData[i + responseLineAsBytes.length] = headersAsBytes[i];
+            }
+
+            for (int i = 0; i < content.length; i++) {
+                fullResponseByteData[i + responseLineAsBytes.length + headersAsBytes.length] = content[i];
+            }
+
+            return fullResponseByteData;
         }
 
-        headersSb.append(System.lineSeparator());
-
-        byte[] headersAsBytes = headersSb.toString().getBytes();
-
-        //Full data
-        byte[] fullResponseByteData = new byte[responseLineAsBytes.length + headersAsBytes.length + this.getContent().length];
-
-        for (int i = 0; i < responseLineAsBytes.length; i++) {
-            fullResponseByteData[i] = responseLineAsBytes[i];
-        }
-
-        for (int i = 0; i < headersAsBytes.length; i++) {
-            fullResponseByteData[i + responseLineAsBytes.length] = headersAsBytes[i];
-        }
-
-        for (int i = 0; i < content.length; i++) {
-            fullResponseByteData[i + responseLineAsBytes.length + headersAsBytes.length] = content[i];
-        }
-
-        return fullResponseByteData;
+        return responseLineAsBytes;
     }
 
     @Override
