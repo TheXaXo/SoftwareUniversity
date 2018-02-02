@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="col-md-4 offset-md-4">
+        <h1 class="text-center" style="padding: 10px;">Register Here</h1>
+        <form method="post" action="/register">
+            <div class="form-group row">
+                <label class="col-md-6" for="emailId">Email</label>
+                <input class="col-md-6 form-control" type="text" id="emailId" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-6" for="passwordId">Password</label>
+                <input class="col-md-6 form-control" type="password" id="passwordId" name="password" required>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-6" for="confirmPasswordId">Confirm Password</label>
+                <input class="col-md-6 form-control" type="password" id="confirmPasswordId" name="confirmPassword" required>
+            </div>
+            <div class="row justify-content-center align-content-center">
+                <button class="btn btn-primary">Register</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

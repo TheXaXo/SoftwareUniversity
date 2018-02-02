@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="col-md-4 offset-md-4">
+        <h1 class="text-center" style="padding: 10px;">Login Here</h1>
+        <form method="post" action="/login">
+            <div class="form-group row">
+                <label class="col-md-4" for="emailId">Email</label>
+                <input class="col-md-8 form-control" type="text" id="emailId" name="email" placeholder="Email" required>
+            </div>
+            <div class="form-group row">
+                <label class="col-md-4" for="passwordId">Password</label>
+                <input class="col-md-8 form-control" type="password" id="passwordId" name="password" required>
+            </div>
+            <div class="row justify-content-center align-content-center">
+                <button class="btn btn-primary">Login</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
