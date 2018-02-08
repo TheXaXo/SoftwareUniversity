@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 public interface Application {
-    Map<String, Function<HttpContext, byte[]>> getRoutes();
+    Map<String, Map<String, Function<HttpContext, byte[]>>> getRoutes();
 
     byte[] handleRequest(HttpContext httpContext);
 
