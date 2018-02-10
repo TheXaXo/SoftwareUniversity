@@ -10,6 +10,14 @@ public class UserRepository extends BaseRepository {
         return true;
     }
 
+    private User findByUsername(String username) {
+        String query = "SELECT * FROM users AS u WHERE u.username = \'" + username + "\'";
+
+        return (User) this.entityManager
+                .createNativeQuery(query, User.class)
+                .getSingleResult();
+    }
+
     @SuppressWarnings("unchecked")
     private User[] findAll() {
         List<User> resultList = this.entityManager

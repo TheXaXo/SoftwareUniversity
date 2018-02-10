@@ -1,33 +1,38 @@
 package org.softuni.main.javache.http;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public class HttpSessionImpl implements HttpSession {
-    private Map<String, Map<String, Object>> allSessions;
+    private String id;
+    private Map<String, Object> attributes;
+    private boolean isValid;
 
-    public HttpSessionImpl() {
-        this.allSessions = new HashMap<>();
+    public HttpSessionImpl(String id) {
+        this.id = id;
+        this.attributes = new HashMap<>();
+        this.isValid = true;
     }
 
     @Override
-    public void addSessionData(String sessionId, Map<String, Object> dataMap) {
-        if (!this.allSessions.containsKey(sessionId)) {
-            this.allSessions.put(sessionId, dataMap);
-        } else {
-            for (Map.Entry<String, Object> kvp : dataMap.entrySet()) {
-                this.allSessions.get(sessionId).put(kvp.getKey(), kvp.getValue());
-            }
-        }
+    public String getId() {
+        return this.id;
     }
 
     @Override
-    public void removeSessionData(String sessionId) {
-        this.allSessions.remove(sessionId);
+    public void addAttribute(String attribute, Object value) {
+        this.attributes.putIfAbsent(attribute, value);
     }
 
     @Override
-    public Map<String, Object> getSessionData(String sessionId) {
-        return this.allSessions.get(sessionId);
+    public Map<String, Object> getAttributes() {
+        return Collections.unmodifiableMap(this.attributes);
+    }
+
+    @Override
+    public void invalidate() {
+        this.isValid = false;
+        this.attributes.clear();
     }
 }

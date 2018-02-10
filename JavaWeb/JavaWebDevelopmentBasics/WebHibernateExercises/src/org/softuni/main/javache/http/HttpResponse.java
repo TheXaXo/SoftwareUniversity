@@ -1,9 +1,11 @@
 package org.softuni.main.javache.http;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public interface HttpResponse {
-    HashMap<String, String> getHeaders();
+    Map<String, String> getHeaders();
+
+    Map<String, HttpCookie> getCookies();
 
     HttpStatus getStatusCode();
 
@@ -17,5 +19,5 @@ public interface HttpResponse {
 
     void addHeader(String header, String value);
 
-    void addCookie(String cookie, String value);
+    void addCookie(HttpCookie cookie);
 }

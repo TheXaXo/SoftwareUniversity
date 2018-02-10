@@ -1,5 +1,6 @@
 package org.softuni.main.casebook.utils;
 
+import org.softuni.main.casebook.annotations.ApplicationRequestHandler;
 import org.softuni.main.casebook.annotations.Get;
 import org.softuni.main.casebook.annotations.Post;
 
@@ -28,7 +29,10 @@ public class HandlerLoader {
             try {
                 String handlerClassName = handlerFile.getName().substring(0, handlerFile.getName().indexOf("."));
                 Class<?> handlerClass = Class.forName(HANDLERS_PACKAGE + "." + handlerClassName);
-                handlerClasses.add(handlerClass);
+
+                if (handlerClass.getAnnotation(ApplicationRequestHandler.class) != null) {
+                    handlerClasses.add(handlerClass);
+                }
             } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }

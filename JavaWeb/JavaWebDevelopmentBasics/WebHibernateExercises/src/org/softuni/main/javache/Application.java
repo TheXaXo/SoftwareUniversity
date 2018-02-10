@@ -1,17 +1,14 @@
 package org.softuni.main.javache;
 
 import org.softuni.main.javache.http.HttpContext;
-import org.softuni.main.javache.http.HttpSession;
-
-import java.util.Map;
-import java.util.function.Function;
+import org.softuni.main.javache.http.HttpSessionStorage;
 
 public interface Application {
-    Map<String, Map<String, Function<HttpContext, byte[]>>> getRoutes();
+    void initializeRoutes();
 
     byte[] handleRequest(HttpContext httpContext);
 
-    HttpSession getSession();
+    HttpSessionStorage getSessionStorage();
 
-    void setSession(HttpSession httpSession);
+    void setSessionStorage(HttpSessionStorage sessionStorage);
 }

@@ -2,15 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Index</title>
+    <title>Home</title>
     <link rel="stylesheet" href="bootstrap.min.css" type="text/css">
 </head>
+<body>
 <div class="container">
     <h1>Hello from casebook</h1>
     <hr>
     <h2>This is Home</h2>
-    <a href="/login">Login</a>
-    <a href="/register">Register</a>
+    <h3>You are logged in!</h3>
+    <form method="post" action="/logout">
+        <button class="btn btn-primary" type="submit">Logout</button>
+    </form>
 </div>
 </body>
 </html>

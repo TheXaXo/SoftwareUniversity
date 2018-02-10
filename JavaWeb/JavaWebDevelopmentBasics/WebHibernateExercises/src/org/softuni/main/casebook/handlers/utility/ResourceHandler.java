@@ -1,15 +1,21 @@
 package org.softuni.main.casebook.handlers.utility;
 
+import org.softuni.main.casebook.handlers.BaseHandler;
 import org.softuni.main.javache.http.HttpRequest;
 import org.softuni.main.javache.http.HttpResponse;
+import org.softuni.main.javache.http.HttpSessionStorage;
 import org.softuni.main.javache.http.HttpStatus;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public final class ResourceHandler {
+public final class ResourceHandler extends BaseHandler {
     private static final String STATIC_RESOURCES_PATH = System.getProperty("user.dir") + "\\src\\org\\softuni\\main\\casebook\\resources\\public\\";
+
+    public ResourceHandler(HttpSessionStorage sessionStorage) {
+        super(sessionStorage);
+    }
 
     public final HttpResponse getResource(HttpRequest httpRequest, HttpResponse httpResponse) {
         try {

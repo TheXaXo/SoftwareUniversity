@@ -5,13 +5,14 @@ import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class HttpRequestImpl implements HttpRequest {
     private String method;
     private String requestUrl;
-    private HashMap<String, String> headers;
-    private HashMap<String, String> bodyParameters;
-    private HashMap<String, String> cookies;
+    private Map<String, String> headers;
+    private Map<String, String> bodyParameters;
+    private Map<String, HttpCookie> cookies;
 
     public HttpRequestImpl(String requestContent) {
         this.initMethod(requestContent);
@@ -22,17 +23,17 @@ public class HttpRequestImpl implements HttpRequest {
     }
 
     @Override
-    public HashMap<String, String> getHeaders() {
+    public Map<String, String> getHeaders() {
         return this.headers;
     }
 
     @Override
-    public HashMap<String, String> getBodyParameters() {
+    public Map<String, String> getBodyParameters() {
         return this.bodyParameters;
     }
 
     @Override
-    public HashMap<String, String> getCookies() {
+    public Map<String, HttpCookie> getCookies() {
         return this.cookies;
     }
 
@@ -78,7 +79,7 @@ public class HttpRequestImpl implements HttpRequest {
 
         for (String cookiePair : cookiePairs) {
             String[] pair = cookiePair.split("=");
-            this.cookies.put(pair[0], pair[1]);
+            this.cookies.put(pair[0], new HttpCookieImpl(pair[0], pair[1]));
         }
     }
 

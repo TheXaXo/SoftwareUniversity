@@ -19,6 +19,8 @@ public final class WebConstants {
 
     public static final String DB_FOLDER = SERVER_DIR + "\\src\\javache\\db";
 
+    public static final String SERVER_SESSION_TOKEN = "Javache";
+
     private WebConstants() {
     }
 }

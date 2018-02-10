@@ -1,6 +1,7 @@
 package org.softuni.main.javache;
 
-import org.softuni.main.javache.http.HttpSession;
+import org.softuni.main.javache.http.HttpSessionStorage;
+import org.softuni.main.javache.http.HttpSessionStorageImpl;
 import org.softuni.main.javache.http.HttpSessionImpl;
 
 import java.io.IOException;
@@ -21,11 +22,13 @@ public class Server {
 
     public void run() throws IOException {
         this.server = new ServerSocket(this.port);
+        this.server.setSoTimeout(WebConstants.SOCKET_TIMEOUT_MILLISECONDS);
+
         System.out.println(WebConstants.LISTENING_MESSAGE + this.port);
 
-        this.server.setSoTimeout(WebConstants.SOCKET_TIMEOUT_MILLISECONDS);
-        HttpSession session = new HttpSessionImpl();
-        application.setSession(session);
+        HttpSessionStorage sessionStorage = new HttpSessionStorageImpl();
+        application.setSessionStorage(sessionStorage);
+        application.initializeRoutes();
 
         while (true) {
             try (Socket clientSocket = this.server.accept()) {

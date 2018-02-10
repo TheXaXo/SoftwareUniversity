@@ -2,20 +2,28 @@ package org.softuni.main.javache.http;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class HttpResponseImpl implements HttpResponse {
     private HttpStatus statusCode;
-    private HashMap<String, String> headers;
+    private Map<String, String> headers;
+    private Map<String, HttpCookie> cookies;
     private byte[] content;
 
     public HttpResponseImpl() {
         this.setContent(new byte[0]);
         this.headers = new HashMap<>();
+        this.cookies = new HashMap<>();
     }
 
     @Override
-    public HashMap<String, String> getHeaders() {
+    public Map<String, String> getHeaders() {
         return this.headers;
+    }
+
+    @Override
+    public Map<String, HttpCookie> getCookies() {
+        return this.cookies;
     }
 
     @Override
@@ -44,14 +52,8 @@ public class HttpResponseImpl implements HttpResponse {
     }
 
     @Override
-    public void addCookie(String cookie, String value) {
-        String cookieString = cookie + "=" + value;
-
-        if (!this.headers.containsKey("Set-Cookie")) {
-            this.headers.put("Set-Cookie", cookieString);
-        } else {
-            this.headers.put("Set-Cookie", this.headers.get("Set-Cookie") + "; " + cookie);
-        }
+    public void addCookie(HttpCookie cookie) {
+        this.cookies.putIfAbsent(cookie.getName(), cookie);
     }
 
     @Override
@@ -73,6 +75,16 @@ public class HttpResponseImpl implements HttpResponse {
 
         for (Map.Entry<String, String> header : this.getHeaders().entrySet()) {
             result.append(header.getKey()).append(": ").append(header.getValue()).append(System.lineSeparator());
+        }
+
+        if (this.getCookies().size() > 0) {
+            result.append("Set-Cookie")
+                    .append(": ")
+                    .append(String.join("; ", this.getCookies()
+                            .entrySet()
+                            .stream()
+                            .map(x -> x.getValue().toString())
+                            .collect(Collectors.toList())));
         }
 
         result.append(System.lineSeparator());
