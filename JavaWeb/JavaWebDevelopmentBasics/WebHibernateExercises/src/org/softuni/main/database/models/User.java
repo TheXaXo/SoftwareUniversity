@@ -3,6 +3,7 @@ package org.softuni.main.database.models;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -19,8 +20,11 @@ public class User {
     @Column(nullable = false)
     private String password;
 
-    public User() {
+    @ManyToMany
+    private Set<User> friends;
 
+    public User() {
+        this.friends = new HashSet<>();
     }
 
     public User(String username, String password) {
@@ -50,5 +54,17 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<User> getFriends() {
+        return Collections.unmodifiableSet(this.friends);
+    }
+
+    public void setFriends(Set<User> friends) {
+        this.friends = friends;
+    }
+
+    public void addFriend(User friend) {
+        this.friends.add(friend);
     }
 }

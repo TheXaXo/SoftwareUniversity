@@ -33,8 +33,9 @@ public class ConnectionHandler extends Thread {
     public void run() {
         try {
             String requestContent = null;
+            int i = 0;
 
-            while (true) {
+            while (i++ < 5000) {
                 requestContent = Reader.readAllLines(this.clientSocketInputStream);
 
                 if (requestContent.length() > 0) {

@@ -10,8 +10,8 @@ public class UserRepository extends BaseRepository {
         return true;
     }
 
-    private User findByUsername(String username) {
-        String query = "SELECT * FROM users AS u WHERE u.username = \'" + username + "\'";
+    private User findBy(String criteria, String value) {
+        String query = "SELECT * FROM users AS u WHERE u." + criteria + " = \'" + value + "\'";
 
         return (User) this.entityManager
                 .createNativeQuery(query, User.class)
@@ -24,5 +24,13 @@ public class UserRepository extends BaseRepository {
                 .createNativeQuery("SELECT * FROM users", User.class)
                 .getResultList();
         return resultList.toArray(new User[resultList.size()]);
+    }
+
+    private void addFriend(String username, String friendName) {
+        User user = this.findBy("username", username);
+        User friend = this.findBy("username", friendName);
+
+        user.addFriend(friend);
+        friend.addFriend(user);
     }
 }
