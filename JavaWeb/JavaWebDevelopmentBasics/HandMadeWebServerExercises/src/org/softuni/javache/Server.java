@@ -1,11 +1,11 @@
 package org.softuni.javache;
 
-import org.softuni.javache.http.HttpSessionStorageImpl;
-import org.softuni.javache.http.HttpSessionStorage;
 import org.softuni.javache.lib.handler.RequestHandler;
 
-import java.io.*;
-import java.net.*;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.SocketTimeoutException;
 import java.util.concurrent.FutureTask;
 
 public class Server {

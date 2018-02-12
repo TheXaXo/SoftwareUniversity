@@ -1,5 +1,6 @@
 package org.softuni.javache;
 
+import org.softuni.javache.lib.handler.AbstractRequestHandler;
 import org.softuni.javache.lib.handler.RequestHandler;
 
 import java.io.File;
@@ -37,6 +38,7 @@ public class StartUp {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private static Iterable<RequestHandler> requestHandlersScan(String path, Collection<RequestHandler> requestHandlers) {
         File folderCandidate = new File(path);
 
@@ -68,11 +70,18 @@ public class StartUp {
                     try {
                         Class handlerClass = handlerClassLoader.loadClass(className);
 
-                        if (RequestHandler.class.isAssignableFrom(handlerClass)) {
+                        if (AbstractRequestHandler.class.isAssignableFrom(handlerClass)) {
+                            RequestHandler handler = (RequestHandler) handlerClass
+                                    .getDeclaredConstructor(String.class)
+                                    .newInstance(rootPath);
+
+                            requestHandlers.add(handler);
+                        } else if (RequestHandler.class.isAssignableFrom(handlerClass)) {
                             RequestHandler handler = (RequestHandler) handlerClass.newInstance();
+
                             requestHandlers.add(handler);
                         }
-                    } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+                    } catch (ReflectiveOperationException e) {
                         e.printStackTrace();
                     }
                 }

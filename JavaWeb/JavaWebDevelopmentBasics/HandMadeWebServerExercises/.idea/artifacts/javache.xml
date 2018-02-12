@@ -25,6 +25,7 @@
             <element id="directory" name="lib">
               <element id="directory" name="handler">
                 <element id="file-copy" path="$PROJECT_DIR$/out/production/HandMadeWebServerExercises/org/softuni/javache/lib/handler/RequestHandler.class" />
+                <element id="file-copy" path="$PROJECT_DIR$/out/production/HandMadeWebServerExercises/org/softuni/javache/lib/handler/AbstractRequestHandler.class" />
               </element>
             </element>
             <element id="directory" name="io">
