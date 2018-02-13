@@ -6,18 +6,20 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
+import java.util.Map;
+import java.util.Set;
 
 public class ConnectionHandler extends Thread {
     private Socket clientSocket;
     private InputStream clientSocketInputStream;
     private OutputStream clientSocketOutputStream;
-    private Iterable<RequestHandler> requestHandlers;
-    private String rootPath;
+    private Map<String, RequestHandler> requestHandlers;
+    private Set<String> requestHandlersPriority;
 
-    public ConnectionHandler(Socket clientSocket, String rootPath, Iterable<RequestHandler> requestHandlers) {
+    public ConnectionHandler(Socket clientSocket, Map<String, RequestHandler> requestHandlers, Set<String> requestHandlersPriority) {
         this.initializeConnection(clientSocket);
         this.requestHandlers = requestHandlers;
-        this.rootPath = rootPath;
+        this.requestHandlersPriority = requestHandlersPriority;
     }
 
     private void initializeConnection(Socket clientSocket) {
@@ -33,7 +35,12 @@ public class ConnectionHandler extends Thread {
     @Override
     public void run() {
         try {
-            for (RequestHandler requestHandler : this.requestHandlers) {
+            for (String requestHandlerName : this.requestHandlersPriority) {
+                if (!this.requestHandlers.containsKey(requestHandlerName)) {
+                    continue;
+                }
+
+                RequestHandler requestHandler = this.requestHandlers.get(requestHandlerName);
                 requestHandler.handleRequest(this.clientSocketInputStream, this.clientSocketOutputStream);
 
                 if (requestHandler.hasIntercepted()) {

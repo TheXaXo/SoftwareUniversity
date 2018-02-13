@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.FutureTask;
 
 public class Server {
@@ -16,14 +18,12 @@ public class Server {
     private int port;
     private int timeouts;
     private ServerSocket server;
-    private Iterable<RequestHandler> requestHandlers;
-    private String rootPath;
+    private Map<String, RequestHandler> requestHandlers;
 
-    public Server(int port, String rootPath, Iterable<RequestHandler> requestHandlers) {
+    public Server(int port, Map<String, RequestHandler> requestHandlers) {
         this.port = port;
         this.timeouts = 0;
         this.requestHandlers = requestHandlers;
-        this.rootPath = rootPath;
     }
 
     public void run() throws IOException {
@@ -32,12 +32,15 @@ public class Server {
 
         this.server.setSoTimeout(SOCKET_TIMEOUT_MILLISECONDS);
 
+        ServerConfig serverConfig = new ServerConfig(WebConstants.SERVER_ROOT_PATH);
+        Set<String> requestHandlersPriority = serverConfig.getOrderedHandlersNames();
+
         while (true) {
             try (Socket clientSocket = this.server.accept()) {
                 clientSocket.setSoTimeout(SOCKET_TIMEOUT_MILLISECONDS);
 
                 ConnectionHandler connectionHandler
-                        = new ConnectionHandler(clientSocket, this.rootPath, requestHandlers);
+                        = new ConnectionHandler(clientSocket, requestHandlers, requestHandlersPriority);
 
                 FutureTask<?> task = new FutureTask<>(connectionHandler, null);
                 task.run();
