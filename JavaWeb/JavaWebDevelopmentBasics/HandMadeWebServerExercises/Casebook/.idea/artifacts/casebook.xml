@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="casebook">
+    <output-path>$PROJECT_DIR$/out/artifacts/casebook</output-path>
+    <root id="archive" name="casebook.jar">
+      <element id="file-copy" path="$PROJECT_DIR$/out/production/Casebook/IndexSolet.class" />
+    </root>
+  </artifact>
+</component>

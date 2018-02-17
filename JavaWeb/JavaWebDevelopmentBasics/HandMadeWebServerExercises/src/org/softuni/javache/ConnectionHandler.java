@@ -1,7 +1,9 @@
 package org.softuni.javache;
 
+import org.softuni.javache.io.Reader;
 import org.softuni.javache.lib.handler.RequestHandler;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -15,6 +17,7 @@ public class ConnectionHandler extends Thread {
     private OutputStream clientSocketOutputStream;
     private Map<String, RequestHandler> requestHandlers;
     private Set<String> requestHandlersPriority;
+    private String cachedInputStreamContent;
 
     public ConnectionHandler(Socket clientSocket, Map<String, RequestHandler> requestHandlers, Set<String> requestHandlersPriority) {
         this.initializeConnection(clientSocket);
@@ -41,7 +44,7 @@ public class ConnectionHandler extends Thread {
                 }
 
                 RequestHandler requestHandler = this.requestHandlers.get(requestHandlerName);
-                requestHandler.handleRequest(this.clientSocketInputStream, this.clientSocketOutputStream);
+                requestHandler.handleRequest(this.getClientSocketInputStream(), this.clientSocketOutputStream);
 
                 if (requestHandler.hasIntercepted()) {
                     break;
@@ -54,5 +57,13 @@ public class ConnectionHandler extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private InputStream getClientSocketInputStream() throws IOException {
+        if (this.cachedInputStreamContent == null) {
+            this.cachedInputStreamContent = Reader.readAllLines(this.clientSocketInputStream);
+        }
+
+        return new ByteArrayInputStream(this.cachedInputStreamContent.getBytes());
     }
 }

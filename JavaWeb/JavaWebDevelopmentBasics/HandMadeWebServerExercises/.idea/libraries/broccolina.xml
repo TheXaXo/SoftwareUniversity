@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="broccolina">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/out/production/HandMadeWebServerExercises/lib/broccolina.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

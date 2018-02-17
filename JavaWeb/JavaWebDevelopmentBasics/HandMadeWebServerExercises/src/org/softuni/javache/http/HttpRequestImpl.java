@@ -26,7 +26,7 @@ public class HttpRequestImpl implements HttpRequest {
     }
 
     private void initRequestUrl(String requestContent) {
-        this.requestUrl = requestContent.split("[\\s\\?]")[1];
+        this.requestUrl = requestContent.split("[\\s?]")[1];
     }
 
     private void initHeaders(String requestContent) {

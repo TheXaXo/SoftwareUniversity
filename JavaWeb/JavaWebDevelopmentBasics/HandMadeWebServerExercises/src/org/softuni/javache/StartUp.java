@@ -3,12 +3,8 @@ package org.softuni.javache;
 import org.softuni.javache.lib.handler.RequestHandler;
 import org.softuni.javache.lib.handler.RequestHandlerLoader;
 
-import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Map;
-import java.util.Set;
 
 public class StartUp {
     public static void main(String[] args) {

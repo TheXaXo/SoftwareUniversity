@@ -8,5 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="dynamic-handler-lib" level="project" />
+    <orderEntry type="library" name="broccolina" level="project" />
   </component>
 </module>
