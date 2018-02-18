@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="war" build-on-make="true" name="softuniServlets">
+    <output-path>$PROJECT_DIR$/out/artifacts/softuniServlets</output-path>
+    <root id="archive" name="softuniServlets.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="ServletAPIIntroduction" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="ServletAPIIntroduction/web/Web" />
+    </root>
+  </artifact>
+</component>
