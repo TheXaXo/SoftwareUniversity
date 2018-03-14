@@ -1,0 +1,86 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 50px">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <a class="navbar-brand" href="/"><b>Car Dealer</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <ul class="navbar-nav ml-auto">
+            <th:block th:if="${session.userId == null}">
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/register">Register</a>
+                </li>
+            </th:block>
+            <th:block th:if="${session.userId != null}">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="customersDropdown" role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Customers
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="customersDropdown">
+                        <a class="dropdown-item" href="/customers/add">Add Customer</a>
+                        <a class="dropdown-item" href="/customers/all/ascending">All Ascending</a>
+                        <a class="dropdown-item" href="/customers/all/descending">All Descending</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="salesDropdown" role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Sales
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="salesDropdown">
+                        <a class="dropdown-item" href="/sales/add">Add Sale</a>
+                        <a class="dropdown-item" href="/sales">All Sales</a>
+                        <a class="dropdown-item" href="/sales/discounted">Discounted Sales</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="suppliersDropdown" role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Suppliers
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="suppliersDropdown">
+                        <a class="dropdown-item" href="/suppliers/add">Add Supplier</a>
+                        <a class="dropdown-item" href="/suppliers/all">All Suppliers</a>
+                        <a class="dropdown-item" href="/suppliers/local">Local</a>
+                        <a class="dropdown-item" href="/suppliers/importers">Importers</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="partsDropdown" role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Parts
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="partsDropdown">
+                        <a class="dropdown-item" href="/parts/add">Add Part</a>
+                        <a class="dropdown-item" href="/parts/all">All Parts</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="carsDropdown" role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Cars
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="carsDropdown">
+                        <a class="dropdown-item" href="/cars/add">Add Car</a>
+                        <a class="dropdown-item" href="/cars/all">All Cars</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/logs/all">Logs</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/users/logout">Logout</a>
+                </li>
+            </th:block>
+        </ul>
+    </div>
+</nav>

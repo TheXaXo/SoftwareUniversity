@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Review Sale</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div th:replace="partials/navbar"></div>
+    <h1>Review Sale</h1>
+    <div class="card card-block bg-faded" style="padding: 20px">
+        <div class="container">
+            <form th:action="@{/sales/review}" method="post">
+                <div class="form-group">
+                    <label for="customer">Customer</label>
+                    <input type="text" class="form-control" id="customer" name="customer"
+                           th:value="${customerName}" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="car">Car</label>
+                    <input type="text" class="form-control" id="car" name="car"
+                           th:value="${carName}" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="discountString">Discount</label>
+                    <input type="text" class="form-control" id="discountString" name="discountString"
+                           th:value="${discountString}" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="carPrice">Car Price</label>
+                    <input type="text" class="form-control" id="carPrice" name="carPrice"
+                           th:value="${carPrice}" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="finalCarPrice">Final Car Price</label>
+                    <input type="text" class="form-control" id="finalCarPrice" name="finalCarPrice"
+                           th:value="${finalCarPrice}" disabled>
+                </div>
+                <input id="discount" name="discount" type="hidden" th:value="${discount}"/>
+                <input id="carId" name="carId" type="hidden" th:value="${carId}"/>
+                <input id="customerId" name="customerId" type="hidden" th:value="${customerId}"/>
+                <a type="button" th:href="@{/}" class="btn btn-default">Cancel</a>
+                <button type="submit" class="btn btn-primary">Finalize</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

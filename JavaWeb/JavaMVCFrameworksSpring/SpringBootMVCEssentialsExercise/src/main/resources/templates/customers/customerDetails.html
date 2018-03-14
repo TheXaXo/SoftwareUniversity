@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Customer Details</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div th:replace="partials/navbar"></div>
+    <h1 th:text="|Details for ${customerName}|"></h1>
+    <div class="card card-block bg-faded" style="padding: 20px">
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Bought Cars Count</th>
+                <th>Money Spent On Cars</th>
+            </tr>
+            <tr>
+                <td th:text="${customerName}"></td>
+                <td th:text="${boughtCarsCount}"></td>
+                <td th:text="${#numbers.formatDecimal(totalSpentOnCars, 0, 'DEFAULT', 2, 'DEFAULT')}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

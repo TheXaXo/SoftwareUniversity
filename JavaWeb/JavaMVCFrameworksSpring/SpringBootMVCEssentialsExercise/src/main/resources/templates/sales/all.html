@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>All Sales</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div th:replace="partials/navbar"></div>
+    <h1>All Sales</h1>
+    <th:block th:each="sale : ${sales}">
+        <div class="card card-block bg-faded" style="padding: 20px">
+            <h1>Car Info</h1>
+            <table class="table">
+                <tr>
+                    <th>Make</th>
+                    <th>Model</th>
+                    <th>Travelled distance</th>
+                </tr>
+                <tr>
+                    <td th:text="${sale.car.make}"></td>
+                    <td th:text="${sale.car.model}"></td>
+                    <td th:text="${sale.car.travelledDistance}"></td>
+                </tr>
+            </table>
+            <h1>Sale Info</h1>
+            <table class="table">
+                <tr>
+                    <th>Customer</th>
+                    <th>Price</th>
+                </tr>
+                <tr>
+                    <td th:text="${sale.customer.name}"></td>
+                    <td th:text="${#numbers.formatDecimal(sale.salePrice, 0, 'DEFAULT', 2, 'DEFAULT')}"></td>
+                </tr>
+            </table>
+        </div>
+    </th:block>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Car</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div th:replace="partials/navbar"></div>
+    <h1>Add Car</h1>
+    <div class="card card-block bg-faded" style="padding: 20px">
+        <div class="container">
+            <form th:action="@{/cars/add}" method="post">
+                <div class="form-group">
+                    <label for="make">Make</label>
+                    <input type="text" class="form-control" id="make" name="make" placeholder="Enter make">
+                </div>
+                <div class="form-group">
+                    <label for="model">Model</label>
+                    <input type="text" class="form-control" id="model" name="model" placeholder="Enter model">
+                </div>
+                <div class="form-group">
+                    <label for="travelledDistance">Travelled distance</label>
+                    <input type="number" class="form-control" id="travelledDistance" name="travelledDistance"
+                           placeholder="Enter travelled distance">
+                </div>
+                <div class="form-group">
+                    <label for="partsId">Parts IDs</label>
+                    <input type="text" class="form-control" id="partsId" name="partsId"
+                           placeholder="Enter parts id (, separated)">
+                </div>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

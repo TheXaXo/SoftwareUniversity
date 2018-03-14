@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Sale</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div th:replace="partials/navbar"></div>
+    <h1>Add Sale</h1>
+    <div class="card card-block bg-faded" style="padding: 20px">
+        <div class="container">
+            <form th:action="@{/sales/add}" method="post">
+                <div class="form-group">
+                    <label>Customer</label>
+                    <br/>
+                    <select name="customerId" id="customer">
+                        <th:block th:each="customer : ${customers}">
+                            <option th:value="${customer.id}" th:text="${customer.name}"></option>
+                        </th:block>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Car</label>
+                    <br/>
+                    <select name="carId" id="car">
+                        <th:block th:each="car : ${cars}">
+                            <option th:value="${car.id}" th:text="|${car.make} ${car.model}|"></option>
+                        </th:block>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="discount">Discount</label>
+                    <input type="number" max="100" min="0" class="form-control" id="discount" name="discount"
+                           placeholder="Enter discount (in %)">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

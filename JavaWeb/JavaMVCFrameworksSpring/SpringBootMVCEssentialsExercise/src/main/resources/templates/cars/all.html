@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>All Cars</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div th:replace="partials/navbar"></div>
+    <h1>All Cars</h1>
+    <div class="card card-block bg-faded" style="padding: 20px">
+        <table class="table">
+            <tr>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Travelled Distance</th>
+                <th:block th:if="${session.userId != null}">
+                    <th>Actions</th>
+                </th:block>
+            </tr>
+            <th:block th:each="car : ${cars}">
+                <tr>
+                    <td th:text="${car.make}"></td>
+                    <td th:text="${car.model}"></td>
+                    <td th:text="${car.travelledDistance}"></td>
+                    <th:block th:if="${session.userId != null}">
+                        <td><a class="btn btn-info" th:href="@{/cars/{id}/parts(id=${car.id})}">Details</a></td>
+                    </th:block>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+</div>
+</body>
+</html>

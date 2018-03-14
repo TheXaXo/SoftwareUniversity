@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>All Parts</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <div th:replace="partials/navbar"></div>
+    <h1>All Parts</h1>
+    <div class="card card-block bg-faded" style="padding: 20px">
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Supplier</th>
+                <th:block th:if="${session.userId != null}">
+                    <th>Actions</th>
+                </th:block>
+            </tr>
+            <th:block th:each="part : ${parts}">
+                <tr>
+                    <td th:text="${part.name}"></td>
+                    <td th:text="${part.price}"></td>
+                    <td th:text="${part.quantity}"></td>
+                    <td th:text="${part.supplier.name}"></td>
+                    <th:block th:if="${session.userId != null}">
+                        <td><a class="btn btn-info" th:href="@{/parts/edit/{id}(id=${part.id})}">Edit</a>
+                            <a class="btn btn-danger" th:href="@{/parts/delete/{id}(id=${part.id})}">Delete</a>
+                        </td>
+                    </th:block>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+</div>
+</body>
+</html>
