@@ -31,7 +31,7 @@
                     <td th:text="${log.user}"></td>
                     <td th:text="${log.operation}"></td>
                     <td th:text="${log.modifiedTable}"></td>
-                    <td th:text="|${log.date.getDate()}/${log.date.getMonth() + 1}/${log.date.getYear() + 1900} ${log.date.getHours()}:${log.date.getMinutes()}:${log.date.getSeconds()}|"></td>
+                    <td th:text="${#dates.format(log.date, 'dd/MM/yyyy HH:mm:ss')}"></td>
                 </tr>
             </th:block>
         </table>
