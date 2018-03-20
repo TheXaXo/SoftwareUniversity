@@ -1,5 +1,6 @@
 package org.softuni.residentevil.controllers;
 
+import org.softuni.residentevil.annotations.PreAuthenticate;
 import org.softuni.residentevil.entities.Capital;
 import org.softuni.residentevil.entities.Virus;
 import org.softuni.residentevil.models.AddVirusBindingModel;
@@ -30,6 +31,7 @@ public class VirusController {
     }
 
     @GetMapping("/viruses/add")
+    @PreAuthenticate(loggedIn = true)
     public ModelAndView addVirus(ModelAndView modelAndView, @ModelAttribute("virus") AddVirusBindingModel bindingModel) {
         modelAndView.addObject("capitals", this.capitalService.getAllCapitals());
         modelAndView.setViewName("viruses/add");
@@ -38,6 +40,7 @@ public class VirusController {
     }
 
     @PostMapping("/viruses/add")
+    @PreAuthenticate(loggedIn = true)
     public ModelAndView addVirusConfirm(ModelAndView modelAndView, @Valid @ModelAttribute("virus") AddVirusBindingModel bindingModel, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("capitals", this.capitalService.getAllCapitals());
@@ -53,6 +56,7 @@ public class VirusController {
     }
 
     @GetMapping("/viruses/show")
+    @PreAuthenticate(loggedIn = true)
     public ModelAndView showAllViruses(ModelAndView modelAndView) {
         modelAndView.addObject("viruses", this.virusService.findAllViruses());
         modelAndView.setViewName("viruses/show");
@@ -61,6 +65,7 @@ public class VirusController {
     }
 
     @GetMapping("/viruses/delete/{id}")
+    @PreAuthenticate(loggedIn = true)
     public ModelAndView deleteVirus(ModelAndView modelAndView, @PathVariable String id) {
         this.virusService.deleteById(id);
         modelAndView.setViewName("redirect:/viruses/show");
@@ -69,6 +74,7 @@ public class VirusController {
     }
 
     @GetMapping("/viruses/edit/{id}")
+    @PreAuthenticate(loggedIn = true)
     public ModelAndView editVirus(ModelAndView modelAndView, @PathVariable String id, @ModelAttribute("virus") EditVirusBindingModel bindingModel) {
         Virus virus = this.virusService.findVirusById(id);
 
@@ -107,6 +113,7 @@ public class VirusController {
     }
 
     @PostMapping("/viruses/edit/{id}")
+    @PreAuthenticate(loggedIn = true)
     public ModelAndView editVirusConfirm(ModelAndView modelAndView, @Valid @ModelAttribute("virus") EditVirusBindingModel bindingModel, BindingResult bindingResult, @PathVariable String id) {
         if (bindingResult.hasErrors()) {
             modelAndView.addObject("capitals", this.capitalService.getAllCapitals());

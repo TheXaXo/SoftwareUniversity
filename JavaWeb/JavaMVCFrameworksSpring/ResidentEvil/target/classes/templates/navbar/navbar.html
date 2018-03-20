@@ -7,24 +7,39 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/" style="color: whitesmoke">Home</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: whitesmoke">
-                        Viruses
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/viruses/show">Show</a>
-                        <a class="dropdown-item" href="/viruses/add">Add</a>
-                    </div>
-                </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/map" style="color: whitesmoke">Map</a>
-                </li>
-            </ul>
+            <th:block th:if="${session.userId != null}">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/" style="color: whitesmoke">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="color: whitesmoke">
+                            Viruses
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/viruses/show">Show</a>
+                            <a class="dropdown-item" href="/viruses/add">Add</a>
+                        </div>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/map" style="color: whitesmoke">Map</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/logout" style="color: whitesmoke">Logout</a>
+                    </li>
+                </ul>
+            </th:block>
+            <th:block th:if="${session.userId == null}">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/login" style="color: whitesmoke">Login</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/register" style="color: whitesmoke">Register</a>
+                    </li>
+                </ul>
+            </th:block>
         </div>
     </nav>
 </div>

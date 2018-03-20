@@ -11,7 +11,12 @@
 <div th:replace="navbar/navbar"></div>
 <div th:class="container">
     <div th:class="jumbotron">
-        <h1>Welcome to Resident Evil!</h1>
+        <th:block th:if="${session.userId == null}">
+            <h1>Welcome to Resident Evil!</h1>
+        </th:block>
+        <th:block th:if="${session.userId != null}">
+            <h1 th:text="|Welcome, ${session.username}|"></h1>
+        </th:block>
     </div>
 </div>
 </body>
