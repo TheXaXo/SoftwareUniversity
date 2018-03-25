@@ -7,7 +7,7 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <th:block th:if="${session.userId != null}">
+            <th:block sec:authorize="isAuthenticated()">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="/" style="color: whitesmoke">Home</a>
@@ -19,18 +19,29 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="/viruses/show">Show</a>
-                            <a class="dropdown-item" href="/viruses/add">Add</a>
+                            <th:block sec:authorize="hasAnyRole('ADMIN', 'MODERATOR')">
+                                <a class="dropdown-item" href="/viruses/add">Add</a>
+                            </th:block>
                         </div>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="/map" style="color: whitesmoke">Map</a>
-                    </li>
+                    <th:block sec:authorize="hasRole('ADMIN')">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="usersDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                               style="color: whitesmoke">
+                                Users
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="usersDropdown">
+                                <a class="dropdown-item" href="/users/all">All</a>
+                            </div>
+                        </li>
+                    </th:block>
                     <li class="nav-item active">
                         <a class="nav-link" href="/logout" style="color: whitesmoke">Logout</a>
                     </li>
                 </ul>
             </th:block>
-            <th:block th:if="${session.userId == null}">
+            <th:block sec:authorize="!isAuthenticated()">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
                         <a class="nav-link" href="/login" style="color: whitesmoke">Login</a>

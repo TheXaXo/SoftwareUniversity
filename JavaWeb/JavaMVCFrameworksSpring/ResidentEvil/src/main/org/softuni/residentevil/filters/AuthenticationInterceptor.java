@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 @Component
 public class AuthenticationInterceptor extends HandlerInterceptorAdapter {
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         if (handler instanceof HandlerMethod) {
             HandlerMethod method = (HandlerMethod) handler;
 

@@ -11,4 +11,10 @@ public class HomeController {
         modelAndView.setViewName("index");
         return modelAndView;
     }
+
+    @GetMapping("/unauthorized")
+    public ModelAndView unauthorized(ModelAndView modelAndView) {
+        modelAndView.setViewName("unauthorized");
+        return modelAndView;
+    }
 }

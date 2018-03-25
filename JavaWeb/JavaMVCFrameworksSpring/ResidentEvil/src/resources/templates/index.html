@@ -1,23 +1,24 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Resident Evil</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
-    <script th:src="@{/js/bootstrap.js}"></script>
+    <th:block th:replace="fragments/head"></th:block>
 </head>
 <body>
-<div th:replace="navbar/navbar"></div>
-<div th:class="container">
-    <div th:class="jumbotron">
-        <th:block th:if="${session.userId == null}">
-            <h1>Welcome to Resident Evil!</h1>
-        </th:block>
-        <th:block th:if="${session.userId != null}">
-            <h1 th:text="|Welcome, ${session.username}|"></h1>
-        </th:block>
+<header>
+    <div th:replace="fragments/navbar"></div>
+</header>
+<main>
+    <div th:class="container">
+        <div th:class="jumbotron">
+            <th:block sec:authorize="!isAuthenticated()">
+                <h1>Welcome to Resident Evil!</h1>
+            </th:block>
+            <th:block sec:authorize="isAuthenticated()">
+                <h1 th:text="|Welcome, ${#authentication.name}|"></h1>
+            </th:block>
+        </div>
     </div>
-</div>
+</main>
+<footer></footer>
 </body>
 </html>

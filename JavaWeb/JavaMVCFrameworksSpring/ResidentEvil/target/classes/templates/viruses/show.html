@@ -1,38 +1,43 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8"/>
-    <title>Show Viruses</title>
-    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <script th:src="@{/js/jquery-3.3.1.min.js}"></script>
-    <script th:src="@{/js/bootstrap.js}"></script>
+    <th:block th:replace="fragments/head"></th:block>
 </head>
 <body>
-<div th:replace="navbar/navbar"></div>
-<div class="container">
-    <h1>All Viruses</h1>
-    <table class="table">
-        <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Magnitude</th>
-            <th>Released On</th>
-            <th>Actions</th>
-        </tr>
-        <th:block th:each="virus, iter : ${viruses}">
+<header>
+    <div th:replace="fragments/navbar"></div>
+</header>
+<main>
+    <div class="container">
+        <h1>All Viruses</h1>
+        <table class="table">
             <tr>
-                <td th:text="${iter.index + 1}"></td>
-                <td th:text="${virus.name}"></td>
-                <td th:text="${virus.magnitude}"></td>
-                <td th:text="${virus.releasedOn}"></td>
-                <td>
-                    <a class="btn btn-info" th:href="@{/viruses/edit/{id}(id=${virus.id})}">Edit</a>
-                    <a class="btn btn-danger"
-                       th:href="@{/viruses/delete/{id}(id=${virus.id})}">Delete</a>
-                </td>
+                <th>#</th>
+                <th>Name</th>
+                <th>Magnitude</th>
+                <th>Released On</th>
+                <th:block sec:authorize="hasAnyRole('ADMIN', 'MODERATOR')">
+                    <th>Actions</th>
+                </th:block>
             </tr>
-        </th:block>
-    </table>
-</div>
+            <th:block th:each="virus, iter : ${viruses}">
+                <tr>
+                    <td th:text="${iter.index + 1}"></td>
+                    <td th:text="${virus.name}"></td>
+                    <td th:text="${virus.magnitude}"></td>
+                    <td th:text="${virus.releasedOn}"></td>
+                    <th:block sec:authorize="hasAnyRole('ADMIN', 'MODERATOR')">
+                        <td>
+                            <a class="btn btn-info" th:href="@{/viruses/edit/{id}(id=${virus.id})}">Edit</a>
+                            <a class="btn btn-danger"
+                               th:href="@{/viruses/delete/{id}(id=${virus.id})}">Delete</a>
+                        </td>
+                    </th:block>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+</main>
+<footer></footer>
 </body>
 </html>
