@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="nuggets:war">
+    <output-path>$USER_HOME$/Desktop/Nuggets/target</output-path>
+    <root id="archive" name="nuggets-1.0.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="nuggets:war exploded" />
+    </root>
+  </artifact>
+</component>

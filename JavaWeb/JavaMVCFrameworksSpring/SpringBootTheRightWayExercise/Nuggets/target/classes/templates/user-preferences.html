@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="fragments/head"></th:block>
+</head>
+<body>
+<div class="container-fluid">
+    <th:block th:replace="fragments/navbar"></th:block>
+    <div>
+        <h1 class="text-center mt-3">Preferences</h1>
+        <th:block th:if="${preferences.size() > 0}">
+            <table class="table mt-5">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="preference,iter : ${preferences}">
+                    <tr>
+                        <th scope="row" th:text="${iter.index + 1}"></th>
+                        <td th:text="${preference.getName()}"></td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+        </th:block>
+        <th:block th:if="${preferences.size() == 0}">
+            <h2 class="text-center">
+                Your preferences have not been loaded yet, or are not supported by our database.
+            </h2>
+        </th:block>
+    </div>
+</div>
+</body>
+</html>
