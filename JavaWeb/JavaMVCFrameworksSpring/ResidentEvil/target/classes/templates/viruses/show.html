@@ -36,8 +36,23 @@
                 </tr>
             </th:block>
         </table>
+        <nav>
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link"
+                       th:if="${currentPage - 1} >= 0"
+                       th:href="@{/viruses/show(page=${currentPage - 1})}">Previous</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link"
+                       th:if="${currentPage + 1 < totalPagesCount}"
+                       th:href="@{/viruses/show(page=${currentPage + 1})}">Next</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </main>
-<footer></footer>
+<footer>
+</footer>
 </body>
 </html>

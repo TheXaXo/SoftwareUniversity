@@ -1,6 +1,7 @@
 package org.softuni.residentevil.controllers;
 
 import org.softuni.residentevil.entities.User;
+import org.softuni.residentevil.errors.UserNotFoundException;
 import org.softuni.residentevil.models.EditUserBindingModel;
 import org.softuni.residentevil.models.LoginUserBindingModel;
 import org.softuni.residentevil.models.RegisterUserBindingModel;
@@ -15,7 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 @Controller
@@ -99,8 +99,7 @@ public class UserController {
         User user = this.userService.getUserById(id);
 
         if (user == null) {
-            modelAndView.setViewName("redirect:/users/all");
-            return modelAndView;
+            throw new UserNotFoundException();
         }
 
         bindingModel.setUsername(user.getUsername());

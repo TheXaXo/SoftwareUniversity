@@ -2,6 +2,7 @@ package org.softuni.residentevil.services;
 
 import org.softuni.residentevil.entities.Role;
 import org.softuni.residentevil.entities.User;
+import org.softuni.residentevil.errors.UserNotFoundException;
 import org.softuni.residentevil.models.EditUserBindingModel;
 import org.softuni.residentevil.models.RegisterUserBindingModel;
 import org.softuni.residentevil.repositories.RoleRepository;
@@ -94,7 +95,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         User user = this.getUserById(id);
 
         if (user == null) {
-            return;
+            throw new UserNotFoundException();
         }
 
         user.setUsername(bindingModel.getUsername());

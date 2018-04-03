@@ -3,10 +3,13 @@ package org.softuni.residentevil.services;
 import org.softuni.residentevil.entities.Virus;
 import org.softuni.residentevil.entities.enums.VirusMagnitude;
 import org.softuni.residentevil.entities.enums.VirusMutation;
+import org.softuni.residentevil.errors.VirusNotFoundException;
 import org.softuni.residentevil.models.AddVirusBindingModel;
 import org.softuni.residentevil.models.EditVirusBindingModel;
 import org.softuni.residentevil.repositories.VirusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -48,8 +51,8 @@ public class VirusServiceImpl implements VirusService {
     }
 
     @Override
-    public List<Virus> findAllViruses() {
-        return this.repository.findAll();
+    public Page<Virus> findVirusesByPage(Pageable pageable) {
+        return this.repository.findAll(pageable);
     }
 
     @Override
@@ -68,7 +71,7 @@ public class VirusServiceImpl implements VirusService {
         Virus virus = this.repository.findVirusById(id);
 
         if (virus == null) {
-            return;
+            throw new VirusNotFoundException();
         }
 
         virus.setName(bindingModel.getName());
@@ -88,5 +91,10 @@ public class VirusServiceImpl implements VirusService {
         }
 
         this.repository.saveAndFlush(virus);
+    }
+
+    @Override
+    public long getPagesCount(int pageSize) {
+        return this.repository.count() / pageSize;
     }
 }

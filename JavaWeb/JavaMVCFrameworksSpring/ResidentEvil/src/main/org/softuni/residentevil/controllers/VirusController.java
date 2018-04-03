@@ -2,11 +2,14 @@ package org.softuni.residentevil.controllers;
 
 import org.softuni.residentevil.entities.Capital;
 import org.softuni.residentevil.entities.Virus;
+import org.softuni.residentevil.errors.VirusNotFoundException;
 import org.softuni.residentevil.models.AddVirusBindingModel;
 import org.softuni.residentevil.models.EditVirusBindingModel;
 import org.softuni.residentevil.services.CapitalService;
 import org.softuni.residentevil.services.VirusService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -57,9 +60,12 @@ public class VirusController {
 
     @GetMapping("/viruses/show")
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_MODERATOR', 'ROLE_ADMIN')")
-    public ModelAndView showAllViruses(ModelAndView modelAndView) {
-        modelAndView.addObject("viruses", this.virusService.findAllViruses());
+    public ModelAndView showAllViruses(@PageableDefault(size = 1) Pageable pageable, ModelAndView modelAndView) {
+        modelAndView.addObject("viruses", this.virusService.findVirusesByPage(pageable));
         modelAndView.setViewName("viruses/show");
+
+        modelAndView.addObject("totalPagesCount", this.virusService.getPagesCount(pageable.getPageSize()));
+        modelAndView.addObject("currentPage", pageable.getPageNumber());
 
         return modelAndView;
     }
@@ -79,8 +85,7 @@ public class VirusController {
         Virus virus = this.virusService.findVirusById(id);
 
         if (virus == null) {
-            modelAndView.setViewName("redirect:/viruses/show");
-            return modelAndView;
+            throw new VirusNotFoundException();
         }
 
         bindingModel.setName(virus.getName());
