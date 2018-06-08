@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css?family=Indie+Flower');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Roboto, sans-serif;
+    background-color: #e2d7aa;
+    color: #000000;
+    font-size: 16px;
+    width: 1180px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+div.img-container {
+    height: 450px;
+    margin-top: 65px;
+}
+
+div.img-container img {
+    width: 1100px;
+    height: 450px;
+}
+
+h1 {
+    font-size: 60px;
+    margin-top: 65px;
+    font-family: ‘Indie Flower’, cursive;
+}
+
+h2, h3 {
+    margin: 0;
+}
+
+nav {
+    margin: 30px;
+}
+
+li {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+a {
+    font-size: 28px;
+    color: #000000;
+    text-decoration: none;
+}
+
+h3 > a, ul li:first-of-type a, ul li:last-of-type a {
+    color: #0a2d4a;
+    font-weight: Bold;
+}
+
+main {
+    margin: 0 auto;
+}
+
+article {
+    display: inline-block;
+    width: 350px;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+article > img {
+    width: 350px;
+    height: 200px;
+    margin-bottom: 20px;
+}
+
+p {
+    text-align: justify;
+}
+
+p:first-letter {
+    font-family: EucrosiaUPC, sans-serif;
+    font-size: 40px;
+}
+
+span > a {
+    background: url(images/bg2.jpg);
+    color: #ffffff;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+footer {
+    margin-top: 15px;
+    padding: 10px 0 10px 0;
+}
+
+.comments a, .readmore a {
+    text-transform: uppercase;
+}
+
+article p:last-of-type {
+    margin-top: 10px;
+}
+
+article p:last-of-type a {
+    font-size: 1em;
+}
+
+article p:last-of-type span:first-of-type a::before {
+    content: url("images/comment.png");
+    position: relative;
+    right: 5px;
+    top: 7px;
+    padding: 10px;
+}
