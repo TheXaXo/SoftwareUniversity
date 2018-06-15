@@ -1,0 +1,53 @@
+@font-face {
+    font-family: 'OpenSans-ExtraBold';
+    src: url('/fonts/OpenSans-ExtraBold.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #F0F0E8;
+    font-family: 'OpenSans-ExtraBold', 'Helvetica', sans-serif;
+    font-size: 16px;
+}
+
+header {
+    text-align: center;
+    width: 90%;
+    margin: 0 auto;
+}
+
+header > h1 {
+    font-size: 56px;
+    color: #009288;
+    font-weight: 800;
+}
+
+header > h2, article > header > p {
+    color: #7B7E80;
+    font-weight: 800;
+}
+
+article {
+    display: inline-block;
+    width: 15%;
+    margin-left: 2%;
+    margin-right: 2%;
+    padding: 2%;
+}
+
+section {
+    width: 90%;
+    margin: 3% auto;
+    text-align: center;
+}
+
+article > main > p {
+    color: #7B7E80;
+}
+
+article:hover {
+    background: white;
+    cursor: pointer;
+    border-left: 10px solid #009288;
+}

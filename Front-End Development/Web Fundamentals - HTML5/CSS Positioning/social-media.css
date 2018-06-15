@@ -1,0 +1,70 @@
+body {
+    background: #292929;
+    padding: 2%;
+    font-size: 1.1em;
+}
+
+article {
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 3%;
+}
+
+ul {
+    padding: 0;
+}
+
+h2 {
+    text-transform: uppercase;
+    font-weight: 900;
+    color: white;
+}
+
+li {
+    text-transform: capitalize;
+    list-style: none;
+}
+
+li a {
+    color: #BBB088;
+    text-decoration: none;
+}
+
+footer > section > article > main > div {
+    width: 70px;
+    height: 58px;
+    background: url("images/social.jpg");
+    display: inline-block;
+}
+
+.twitter {
+    background-position: 772px 126px;
+}
+
+.linkedin {
+    background-position: 642px 126px;
+}
+
+.youtube {
+    background-position: 325px 126px;
+}
+
+.facebook, .twitter, .youtube, .linkedin {
+    cursor: pointer;
+}
+
+.facebook:hover {
+    background-position: 0 60px;
+}
+
+.linkedin:hover {
+    background-position: 642px 63px;
+}
+
+.youtube:hover {
+    background-position: 325px 63px;
+}
+
+.twitter:hover {
+    background-position: -66px 63px;
+}

@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+body {
+    font-family: 'Open Sans', serif;
+    margin: 0;
+    padding: 0;
+    background: #EE7047;
+    color: #453331;
+}
+
+header {
+    float: left;
+    width: 35%;
+    margin: 4% 2%;
+}
+
+h1 {
+    margin: 0;
+    border: 4px double #B3463A;
+    border-radius: 5px;
+    text-align: center;
+    font-style: italic;
+    padding: 2%;
+}
+
+nav {
+    float: right;
+    width: 40%;
+    margin: 4% 2%;
+    text-align: right;
+    text-transform: uppercase;
+}
+
+main {
+    clear: both;
+}
+
+nav > ul {
+    padding: 0;
+}
+
+nav > ul > li {
+    display: inline-block;
+    border: 4px double #B3463A;
+    border-radius: 5px;
+    padding: 2% 4%;
+    margin-left: 5%;
+}
+
+nav > ul > li:hover {
+    background: #B3463A;
+    cursor: pointer;
+}
+
+main {
+    background: #F8B544;
+    border-radius: 15px;
+    margin-left: 2%;
+    margin-right: 2%;
+    padding: 2%;
+}
+
+img {
+    float: right;
+    width: 20%;
+    border: 2px solid #B3463A;
+    border-radius: 15px;
+    margin-left: 2%;
+}
+
+article {
+    border: 2px solid #B3463A;
+    border-radius: 15px;
+    padding: 3% 3% 2%;
+    margin-bottom: 1%;
+}
+
+figure {
+    margin: 0;
+    padding: 0;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+    text-align: justify;
+}
+
+button {
+    outline: none;
+    border: 2px solid #B3463A;
+    border-radius: 15px;
+    text-transform: uppercase;
+    color: #B3463A;
+    padding: 1%;
+    background: none;
+    font-weight: bold;
+    margin-top: 2%;
+}
+
+button:hover {
+    background: #B3463A;
+    cursor: pointer;
+    color: white;
+}
+
+footer {
+    text-align: center;
+    border: 2px dashed #B3463A;
+    border-radius: 5px;
+    width: 95%;
+    margin: 2% auto;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 1%;
+}
