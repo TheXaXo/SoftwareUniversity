@@ -1,0 +1,280 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    font-size: 14px;
+    color: white;
+}
+
+header {
+    background: linear-gradient(rgba(79, 82, 91, 0.85), rgba(79, 82, 91, 0.85)), url("img/header-bg.png");
+    background-size: cover;
+    padding: 2% 5% 0;
+}
+
+nav {
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    display: flex;
+    justify-content: space-between;
+}
+
+nav > ul {
+    display: flex;
+    justify-content: flex-end;
+    list-style-type: none;
+    width: 40%;
+}
+
+nav > ul li {
+    display: inline-block;
+    margin-left: 4%;
+}
+
+nav > ul > li > a {
+    text-decoration: none;
+    color: white;
+}
+
+nav > ul > li > a:hover, .heading-container > i:hover {
+    color: #fa692e;
+    cursor: pointer;
+}
+
+.bold {
+    font-weight: 900;
+}
+
+.heading-container {
+    clear: both;
+    width: 40%;
+    margin: 18% auto 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.heading-container > h1 {
+    font-weight: 100;
+}
+
+section.first-section, header > section {
+    display: flex;
+    justify-content: space-between;
+}
+
+header > section {
+    margin-top: 10%;
+}
+
+article {
+    width: 20%;
+}
+
+article > p {
+    margin-top: 15%;
+    margin-bottom: 15%;
+}
+
+header > section > article:hover {
+    border-bottom: 10px solid #fa692e;
+}
+
+main {
+    color: black;
+}
+
+main > section.first-section {
+    padding-left: 15%;
+    padding-right: 15%;
+    margin-top: 5%;
+}
+
+p.quote {
+    font-weight: bold;
+    font-size: 2em;
+    text-align: right;
+}
+
+p.quote-author {
+    text-transform: capitalize;
+    text-align: right;
+}
+
+p.info-bold {
+    font-weight: bold;
+}
+
+section.second-section {
+    background: #3C3E4A;
+    padding: 3% 10% 0;
+}
+
+section.second-section > h1 {
+    color: white;
+    font-weight: 900;
+    margin-bottom: 10%;
+    width: 30%;
+}
+
+div.lists {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+div.lists > ul {
+    list-style-type: none;
+    color: white;
+    width: 40%;
+}
+
+span.time {
+    font-weight: 900;
+    margin-right: 5%;
+}
+
+span.event-name {
+    font-weight: 100;
+    text-transform: capitalize;
+}
+
+div.lists > ul > li {
+    margin-bottom: 20%;
+}
+
+div.lists > ul > li > i {
+    border: 17px solid #FA6A2E;
+    border-radius: 50%;
+    background: #FA6A2E;
+    margin-right: 5%;
+}
+
+section.third-section {
+    background: white;
+    color: black;
+    padding: 3% 15% 0;
+}
+
+div.info-container > h1 {
+    font-weight: 900;
+    width: 25%;
+}
+
+div.info-container > p {
+    font-weight: 900;
+    width: 40%;
+}
+
+.info-container {
+    margin-bottom: 5%;
+}
+
+.first-row, .second-row {
+    padding-left: 5%;
+    padding-right: 5%;
+}
+
+.first-row > article, .second-row > article {
+    width: 30%;
+    margin-bottom: 5%;
+    background: #FAFAFA;
+    box-shadow: 10px 10px 15px -5px rgba(0, 0, 0, 0.25);
+}
+
+.info-container, .first-row, .second-row {
+    display: flex;
+    justify-content: space-between;
+}
+
+img {
+    width: 100%;
+}
+
+div.about-box {
+    padding: 8%;
+}
+
+.name {
+    display: block;
+    font-weight: 900;
+    text-transform: capitalize;
+    margin-bottom: 10%;
+    font-size: 1.25em;
+}
+
+.position {
+    display: block;
+    color: #FA6A2D;
+    text-transform: uppercase;
+}
+
+.fourth-section {
+    background: #3C3F4A;
+    color: white;
+    text-align: center;
+    padding: 5% 0;
+}
+
+.fourth-section > article {
+    border: 1px solid white;
+    width: 60%;
+    margin: 0 auto;
+    padding: 5% 10%;
+}
+
+.fourth-section > article > h1 {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 3em;
+}
+
+.fourth-section > article > p {
+    width: 60%;
+    margin: 10% auto;
+    font-size: 1.1em;
+}
+
+input {
+    background: none;
+    border: none;
+    outline: none;
+    color: white;
+    border-bottom: 2px solid #FC681E;
+    margin-right: 8%;
+}
+
+::placeholder {
+    color: white;
+    font-size: 1.2em;
+}
+
+button {
+    color: white;
+    background: #FC681E;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    padding: 1.5% 3%;
+}
+
+footer {
+    background: #282A30;
+    padding: 2% 1%;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.right {
+    float: right;
+    width: 15%;
+    color: #8F9093;
+}
