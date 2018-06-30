@@ -1,0 +1,25 @@
+@media screen and (max-width: 1199px) {
+    div.wrap {
+        width: 100%;
+    }
+
+    div.wrapper {
+        width: 100%;
+    }
+
+    section.hero-head > div.wrapper, section.content.bordered, section.content.sponsorship.woodsmoke, section.content.sponsors, footer.main-foot {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+}
+
+@media screen and (max-width: 699px) {
+    * {
+        border: 10px solid red;
+    }
+
+    .content-wrap.two-col .col {
+        margin-left: 1%;
+        margin-right: 1%;
+    }
+}
