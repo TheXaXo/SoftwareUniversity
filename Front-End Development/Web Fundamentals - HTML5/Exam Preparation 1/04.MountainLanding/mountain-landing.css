@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,900|Montserrat:400,700');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lato', sans-serif;
+}
+
+a, button {
+    font-family: 'Lato', sans-serif;
+}
+
+header {
+    background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url("images/header.jpg");
+    background-size: cover;
+    padding-top: 1%;
+    padding-bottom: 10%;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    width: 55%;
+    color: white;
+    margin: 0 auto 5%;
+}
+
+nav > img {
+    width: 10%;
+    height: 10%;
+}
+
+nav > ul {
+    display: flex;
+    list-style-type: none;
+    justify-content: flex-end;
+    width: 80%;
+}
+
+nav > ul > li {
+    margin-left: 5%;
+}
+
+a {
+    text-decoration: none;
+    color: lightgrey;
+    font-size: 0.85em;
+}
+
+header > h1 {
+    width: 30%;
+    color: white;
+    font-weight: 400;
+    font-size: 2.5em;
+    text-align: center;
+    margin: 0 auto;
+}
+
+header > p {
+    text-align: center;
+    margin: 2% auto;
+    color: lightgrey;
+    width: 30%;
+}
+
+header > button {
+    background: #CABC9A;
+    border: none;
+    outline: none;
+    color: white;
+    margin: 0 auto;
+    padding: 0.8% 2%;
+    text-transform: uppercase;
+    display: block;
+}
+
+section.first-section {
+    padding: 5% 0;
+    text-align: center;
+}
+
+section.first-section > h1, section.third-section > h1, section.fourth-section > h1 {
+    color: #433D2D;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 5px rgba(150, 150, 150, 0.5);
+}
+
+section.first-section > p:first-of-type, section.third-section > p:first-of-type, section.fourth-section > p:first-of-type {
+    color: darkgray;
+    font-style: italic;
+}
+
+section.first-section > p:nth-of-type(2) {
+    width: 80%;
+    margin: 5% auto 0;
+    color: darkgray;
+}
+
+section.second-section {
+    background: #F6F6F6;
+    display: flex;
+    justify-content: space-between;
+    padding: 2%;
+}
+
+section.second-section > article {
+    width: 25%;
+    text-align: center;
+}
+
+section.second-section > article > img {
+    width: 20%;
+}
+
+section.second-section > article > h1 {
+    color: #433D2D;
+}
+
+section.second-section > article > p {
+    color: darkgray;
+}
+
+section.third-section {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    padding-left: 5%;
+    padding-right: 5%;
+    text-align: center;
+}
+
+section.third-section > p:first-of-type {
+    margin-bottom: 5%;
+}
+
+section.people {
+    display: flex;
+    justify-content: space-between;
+}
+
+section.people > article {
+    width: 20%;
+}
+
+section.people > article > img {
+    width: 100%;
+    box-shadow: 0 0 35px 0 rgba(0, 0, 0, 0.5);
+}
+
+section.people > article > h1 {
+    text-transform: uppercase;
+    color: #433D2D;
+}
+
+section.people > article > p {
+    color: darkgray;
+}
+
+section.fourth-section {
+    background: #F6F6F6;
+    text-align: center;
+    padding: 5%;
+}
+
+section.descriptions {
+    margin-top: 5%;
+    display: flex;
+    justify-content: space-between;
+}
+
+section.descriptions > article {
+    width: 48%;
+    display: flex;
+    box-shadow: 0 0 35px 0 rgba(0, 0, 0, 0.5);
+}
+
+section.descriptions > article > div.image img {
+    width: 100%;
+    height: 100%;
+}
+
+section.descriptions > article > div.description > h1 {
+    text-transform: uppercase;
+    color: #433D2D;
+    text-align: left;
+}
+
+section.descriptions > article > div.description > p {
+    text-align: left;
+    color: darkgray;
+}
+
+div.description {
+    padding: 5%;
+}

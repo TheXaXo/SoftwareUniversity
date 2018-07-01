@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css?family=Lato:400,900|Montserrat:400,700');
+
+body {
+    margin: 0;
+    padding: 0;
+    color: #383946;
+}
+
+h1, h2 {
+    font-family: 'Lato', sans-serif;
+    text-transform: uppercase;
+    font-weight: 900;
+    font-size: 2.5em;
+}
+
+h2 {
+    font-size: 1.2em;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+p.room-info {
+    color: grey;
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9em;
+}
+
+span.bullet {
+    color: lightgrey;
+}
+
+p.pricing-info {
+    color: grey;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 0.9em;
+}
+
+span.price {
+    color: #1735AE;
+    font-size: 1.3em;
+}
+
+h1 {
+    text-align: center;
+}
+
+section {
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    margin: 3% auto;
+}
+
+article {
+    width: 30%;
+}
+
+img {
+    width: 100%;
+}

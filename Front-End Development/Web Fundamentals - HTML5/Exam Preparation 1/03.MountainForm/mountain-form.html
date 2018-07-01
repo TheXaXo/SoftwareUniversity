@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mountain Form</title>
+    <link rel="stylesheet" href="mountain-form.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css"
+          integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
+</head>
+<body>
+<main>
+    <form>
+        <h1>Mountain Form</h1>
+        <label class="required" for="name">Name:</label>
+        <div class="input">
+            <i class="far fa-user"></i>
+            <input class="field" type="text" placeholder="Name" id="name" required>
+        </div>
+        <label class="required" for="email">Email:</label>
+        <div class="input">
+            <i class="fas fa-envelope"></i>
+            <input class="field" type="email" placeholder="Email" id="email" required>
+        </div>
+        <label for="phone-number">Phone number:</label>
+        <div class="input">
+            <i class="fas fa-mobile-alt"></i>
+            <input class="field" type="number" placeholder="Phone number" id="phone-number">
+        </div>
+        <label class="required" for="password">Password <span class="muted">(minimum 6 characters)</span>:</label>
+        <div class="input">
+            <i class="fas fa-lock"></i>
+            <input class="field" type="password" placeholder="******" id="password" required>
+        </div>
+        <input class="button" type="submit" value="Sign up">
+    </form>
+</main>
+</body>
+</html>

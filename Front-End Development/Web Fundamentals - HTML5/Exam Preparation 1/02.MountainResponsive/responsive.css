@@ -1,0 +1,85 @@
+@media screen and (max-width: 479px) {
+
+    ul.nav-options {
+        display: none;
+    }
+
+    nav.menu {
+        display: flex;
+        justify-content: space-between;
+        height: auto;
+    }
+
+    nav.menu > span {
+        margin: 10% 5%;
+    }
+
+    header.about-us {
+        padding: 10% 5%;
+        width: 100%;
+        box-sizing: border-box;
+        height: auto;
+    }
+
+    nav.menu span, header.about-us > h1, .headings {
+        font-size: 1.2em;
+    }
+
+    header.about-us > p, .info .paragraph {
+        font-size: 1em;
+    }
+
+    header.about-us > p {
+        width: auto;
+    }
+
+    section.best-place {
+        height: auto;
+    }
+
+    .headings, .paragraph {
+        margin: 0 auto;
+        width: 90%;
+    }
+
+    .views {
+        margin-top: 10%;
+        flex-direction: column;
+    }
+
+    .views img {
+        width: 90%;
+        margin: 0 auto 5%;
+    }
+
+    #second-heading {
+        margin-top: 5%;
+        width: 90%;
+    }
+
+    section.why-us {
+        flex-direction: column;
+    }
+
+    article.extras {
+        width: 90%;
+        margin: 0 auto;
+    }
+
+    section.team-presenting {
+        margin-top: 5%;
+        padding-top: 5%;
+    }
+
+    .headings:last-of-type {
+        width: 90%;
+    }
+
+    .our-team {
+        flex-direction: column;
+    }
+
+    .our-team article {
+        margin: 0 auto 5%;
+    }
+}
