@@ -1,0 +1,85 @@
+@media screen and (max-width: 480px) {
+    body {
+        padding-top: 20%;
+        background: #1e1f23 url(images/bg.jpg) no-repeat;
+        background-size: contain;
+    }
+
+    div.logo {
+        margin-bottom: 7%;
+    }
+
+    header > .logo a {
+        font-size: 2.5em;
+    }
+
+    header > .logo span {
+        font-size: 0.4em;
+    }
+
+    .wrapper > header h2 {
+        font-size: 1.2em;
+    }
+
+    .wrapper > header h2:after {
+        width: 60%;
+    }
+
+    .wrapper > header.special {
+        padding: 2%;
+    }
+
+    .wrapper > header p {
+        margin-bottom: 7%;
+        font-size: 0.7em;
+    }
+
+    .wrapper.style1 .content {
+        padding: 2% 6%;
+        font-size: 0.7em;
+        color: darkgray;
+    }
+
+    .wrapper.style2 {
+        padding: 5%;
+    }
+
+    .wrapper.style2 header {
+        padding: 2%;
+    }
+
+    .wrapper.style2 header p {
+        font-size: 0.6em;
+    }
+
+    .gallery {
+        flex-direction: column;
+    }
+
+    .gallery > * {
+        width: 100%;
+    }
+
+    .spotlight > * {
+        width: 100%;
+    }
+
+    .spotlight .inner {
+        padding: 7%;
+    }
+
+    h3 {
+        margin-top: 0;
+        text-align: center;
+    }
+
+    .spotlight p:last-child {
+        text-align: center;
+        color: darkgray;
+        font-size: 0.9em;
+    }
+
+    footer {
+        font-size: 0.8em;
+    }
+}
