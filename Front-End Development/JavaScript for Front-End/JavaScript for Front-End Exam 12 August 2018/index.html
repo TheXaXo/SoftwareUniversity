@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Description</title>
+    <link rel="stylesheet" href="css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="css/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="lib/jquery-3.3.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+<header>
+    <h1 class="h1 text-danger text-center my-4">
+        Modify me
+    </h1>
+</header>
+<main>
+    <div class="container px-5">
+        <hr class="hr bg-danger my-4" style="height: 2px">
+        <h3 class="h3 text-center pb-3 text-danger">
+            Personal Info
+        </h3>
+        <div class="row mb-4 mx-5">
+            <div class="col-4 text-center">
+                <h6 class="h6 text-danger font-weight-bold">
+                    First Name
+                </h6>
+                <input class="form-control input-field text-center" type="text" style="display: none">
+                <h5 class="h5 input-text" id="first-name">Pesho</h5>
+            </div>
+            <div class="col-4 offset-4 text-center">
+                <h6 class="h6 text-danger font-weight-bold">
+                    Last Name
+                </h6>
+                <input class="form-control input-field text-center" type="text" style="display: none">
+                <h5 class="h5 input-text" id="last-name">Peshov</h5>
+            </div>
+        </div>
+        <div class="row mx-5">
+            <div class="col-4 text-center">
+                <h6 class="h6 text-danger font-weight-bold">
+                    Phone Number
+                </h6>
+                <input class="form-control input-field text-center" type="text" style="display: none">
+                <h5 class="h5 input-text" id="phone-number">555-333-4545</h5>
+            </div>
+            <div class="col-4 offset-4 text-center">
+                <h6 class="h6 text-danger font-weight-bold">
+                    UCL
+                </h6>
+                <input class="form-control input-field text-center" type="number" style="display: none">
+                <h5 class="h5 input-text" id="ucl">9311124003</h5>
+            </div>
+        </div>
+        <hr class="hr bg-danger my-4" style="height: 2px">
+        <div class="container px-5">
+            <h3 class="h3 text-center pb-3 text-danger">
+                Team and Position
+            </h3>
+            <div class="row d-flex justify-content-between" id="positions">
+                <div class="form-check-inline mr-0">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optradio" value="support">
+                        <span class="ml-4">Support</span>
+                    </label>
+                </div>
+                <div class="form-check-inline mr-0">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optradio" value="crm">
+                        <span class="ml-4">CRM</span>
+                    </label>
+                </div>
+                <div class="form-check-inline mr-0">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optradio" value="marketing">
+                        <span class="ml-4">Marketing</span>
+                    </label>
+                </div>
+                <div class="form-check-inline mr-0">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optradio" value="development">
+                        <span class="ml-4">Development</span>
+                    </label>
+                </div>
+                <div class="form-check-inline mr-0">
+                    <label class="form-check-label">
+                        <input type="radio" class="form-check-input" name="optradio" checked="checked" value="other"
+                               id="other-positions-radio-button">
+                        <span class="ml-4">Other</span>
+                    </label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 offset-3">
+                    <hr class="hr bg-danger my-4" style="height: 2px">
+                </div>
+            </div>
+            <div id="other-positions">
+                <div class="row mx-5 d-flex justify-content-between">
+                    <div class="form-check-inline mr-0">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optradio2">
+                            <span class="ml-4">Team Lead</span>
+                        </label>
+                    </div>
+                    <div class="form-check-inline mr-0">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optradio2">
+                            <span class="ml-4">Employee</span>
+                        </label>
+                    </div>
+                    <div class="form-check-inline mr-0">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optradio2">
+                            <span class="ml-4">Intern</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div id="support-positions" style="display: none">
+                <div class="row mx-5 d-flex justify-content-between">
+                    <div class="form-check-inline mr-0">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optradio2">
+                            <span class="ml-4">Tech Support</span>
+                        </label>
+                    </div>
+                    <div class="form-check-inline mr-0">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optradio2">
+                            <span class="ml-4">Medical Support</span>
+                        </label>
+                    </div>
+                    <div class="form-check-inline mr-0">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optradio2">
+                            <span class="ml-4">Assistant Support</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div id="crm-positions" style="display: none">
+                <div class="row mx-5 d-flex justify-content-between">
+                    <div class="form-check-inline mr-0">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optradio2">
+                            <span class="ml-4">Community Manager</span>
+                        </label>
+                    </div>
+                    <div class="form-check-inline mr-0">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optradio2">
+                            <span class="ml-4">Customer Care Manager</span>
+                        </label>
+                    </div>
+                    <div class="form-check-inline mr-0">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optradio2">
+                            <span class="ml-4">Lead Administrative Officer</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div id="marketing-positions" style="display: none">
+                <div class="row mx-5 d-flex justify-content-between">
+                    <div class="form-check-inline mr-0">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optradio2">
+                            <span class="ml-4">PR Manager</span>
+                        </label>
+                    </div>
+                    <div class="form-check-inline mr-0">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optradio2">
+                            <span class="ml-4">Social Media Manager</span>
+                        </label>
+                    </div>
+                    <div class="form-check-inline mr-0">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optradio2">
+                            <span class="ml-4">Marketing Specialist</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div id="development-positions" style="display: none">
+                <div class="row mx-5 d-flex justify-content-between">
+                    <div class="form-check-inline mr-0">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optradio2">
+                            <span class="ml-4">Junior Developer</span>
+                        </label>
+                    </div>
+                    <div class="form-check-inline mr-0">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optradio2">
+                            <span class="ml-4">Regular Developer</span>
+                        </label>
+                    </div>
+                    <div class="form-check-inline mr-0">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="optradio2">
+                            <span class="ml-4">Senior Developer</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="hr bg-danger my-4 mx-2" style="height: 2px">
+        <div class="col-4 offset-4 d-flex justify-content-between">
+            <button class="btn btn-danger" id="submit">Submit</button>
+            <button class="btn btn-danger" id="reset">Reset</button>
+        </div>
+    </div>
+</main>
+<script src="js/app.js"></script>
+</body>
+</html>
