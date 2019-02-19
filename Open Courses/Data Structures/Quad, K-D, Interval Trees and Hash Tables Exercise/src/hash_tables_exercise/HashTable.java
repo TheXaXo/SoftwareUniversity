@@ -1,3 +1,5 @@
+package hash_tables_exercise;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;

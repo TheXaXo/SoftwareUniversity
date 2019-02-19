@@ -355,7 +355,6 @@ public class RedBlackTree<T extends Comparable<T>> {
             this.right = right;
         }
 
-
         @Override
         public String toString() {
             return this.value + "";
